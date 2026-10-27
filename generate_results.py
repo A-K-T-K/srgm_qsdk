@@ -515,7 +515,12 @@ def coverage(inputs):
                          both=len(reference) - len(missing), missing_earlier=len(earlier),
                          missing_in_range=len(in_range), label_only=sum(1 for v in in_range.values() if not v[1]),
                          saved_only=len(set(saved_message) - set(reference)), subject_only_messages=len(subject_only),
-                         start_milestone=start, pool_at_start=int(saved.release_tag.eq(start).sum()),
+                         start_milestone=start, start_milestone_date=milestones.tag_commit_date.iloc[0],
+                         pool_first_commit_date=first_saved.isoformat(),
+                         # Positive: the pool begins after the start milestone's tagged commit.
+                         pool_start_after_milestone_days=(first_saved - pd.Timestamp(
+                             milestones.tag_commit_date.iloc[0])).total_seconds() / 86400.0,
+                         pool_at_start=int(saved.release_tag.eq(start).sum()),
                          missing_earlier_at_start=sum(1 for sha in earlier if mapping[sha] == start),
                          sampled=len(sampled), subject_only_sampled=len(subject_only & sampled)))
     return rows
@@ -615,9 +620,10 @@ def tables_markdown(results, backport_rows, coverage_rows):
                      c['missing_earlier'], c['missing_in_range'], c['label_only'], c['saved_only'],
                      c['subject_only_messages']] for c in coverage_rows]),
              table('coverage_start', 'Saved-pool coverage of each window\'s first release interval',
-                   ['SDK', 'Start milestone', 'Pool candidates at start', 'Missing, earlier', 'of which at start',
-                    'Sampled', 'Sampled subject-only messages'],
-                   [[name(c['repository']), c['start_milestone'], c['pool_at_start'], c['missing_earlier'],
+                   ['SDK', 'Start milestone', 'Pool begins after start (days)', 'Pool candidates at start',
+                    'Missing, earlier', 'of which at start', 'Sampled', 'Sampled subject-only messages'],
+                   [[name(c['repository']), c['start_milestone'], num(c['pool_start_after_milestone_days'], 1),
+                     c['pool_at_start'], c['missing_earlier'],
                      c['missing_earlier_at_start'], c['sampled'], c['subject_only_sampled']] for c in coverage_rows]),
              table('data_mining', 'Candidate extraction, inclusion yield, and binary repeat-audit agreement',
                    ['SDK', 'N', 'n', 'n/N', 'Re-audit', 'Yield k/n', 'p_o', 'p_e', 'κ'],

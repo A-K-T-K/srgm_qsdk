@@ -1,5 +1,5 @@
-repository,saved_pool,reference_rule,both,missing_earlier,missing_in_range,label_only,saved_only,subject_only_messages,start_milestone,pool_at_start,missing_earlier_at_start,sampled,subject_only_sampled
-qiskit,259,685,259,14,412,3,0,205,1.2.0rc1,22,14,155,122
-cirq,1079,1117,1079,32,6,6,0,0,v0.1,0,32,284,0
-pennylane,1162,1209,1162,45,2,2,0,0,v0.25.0,5,45,289,0
-qsharp,446,577,446,131,0,0,0,0,v1.0.10-rc,0,130,207,0
+repository,saved_pool,reference_rule,both,missing_earlier,missing_in_range,label_only,saved_only,subject_only_messages,start_milestone,start_milestone_date,pool_first_commit_date,pool_start_after_milestone_days,pool_at_start,missing_earlier_at_start,sampled,subject_only_sampled
+qiskit,259,685,259,14,412,3,0,205,1.2.0rc1,2024-08-01T16:07:16Z,2024-05-14T20:47:29+00:00,-78.8054050925926,22,14,155,122
+cirq,1079,1117,1079,32,6,6,0,0,v0.1,2018-04-17T09:18:52-07:00,2018-04-18T23:42:47+00:00,1.308275462962963,0,32,284,0
+pennylane,1162,1209,1162,45,2,2,0,0,v0.25.0,2022-08-15T20:26:13+02:00,2022-08-05T14:17:23+00:00,-10.172800925925927,5,45,289,0
+qsharp,446,577,446,131,0,0,0,0,v1.0.10-rc,2023-09-18T12:55:37-07:00,2023-09-20T16:19:16+00:00,1.8497569444444444,0,130,207,0

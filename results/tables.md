@@ -10,12 +10,12 @@
 
 ### Saved-pool coverage of each window's first release interval (coverage_start)
 
-| SDK | Start milestone | Pool candidates at start | Missing, earlier | of which at start | Sampled | Sampled subject-only messages |
-|---|---|---|---|---|---|---|
-| Qiskit | 1.2.0rc1 | 22 | 14 | 14 | 155 | 122 |
-| Cirq | v0.1 | 0 | 32 | 32 | 284 | 0 |
-| PennyLane | v0.25.0 | 5 | 45 | 45 | 289 | 0 |
-| Q# | v1.0.10-rc | 0 | 131 | 130 | 207 | 0 |
+| SDK | Start milestone | Pool begins after start (days) | Pool candidates at start | Missing, earlier | of which at start | Sampled | Sampled subject-only messages |
+|---|---|---|---|---|---|---|---|
+| Qiskit | 1.2.0rc1 | -78.8 | 22 | 14 | 14 | 155 | 122 |
+| Cirq | v0.1 | 1.3 | 0 | 32 | 32 | 284 | 0 |
+| PennyLane | v0.25.0 | -10.2 | 5 | 45 | 45 | 289 | 0 |
+| Q# | v1.0.10-rc | 1.8 | 0 | 131 | 130 | 207 | 0 |
 
 
 ### Candidate extraction, inclusion yield, and binary repeat-audit agreement (data_mining)
