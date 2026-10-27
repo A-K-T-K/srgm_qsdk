@@ -1,0 +1,5 @@
+repository,dropped_tag,dropped_fixes,K,aic_goel,aic_yamada,goel_boundary,yamada_boundary,selected,delta_aic,same_selection
+qiskit,1.2.0rc1,5,37,343.55030425163847,355.14932274636567,True,False,goel,11.599018494727204,True
+cirq,v0.1,0,30,169.69763348157448,191.9734420511969,False,False,goel,22.275808569622427,True
+pennylane,v0.25.0,1,37,188.5173931610001,175.8698223913325,True,False,yamada,12.647570769667595,True
+qsharp,v1.0.10-rc,0,25,147.94527699028367,205.77052004308837,False,False,goel,57.825243052804694,True

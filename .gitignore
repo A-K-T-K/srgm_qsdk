@@ -1,0 +1,9 @@
+# Review notes are not part of the codebase
+MANUSCRIPT_CODEBASE_REVIEW.md
+
+# Full repository clones (see README, Setup)
+data/repos/
+
+__pycache__/
+
+Final_.tex

@@ -1,0 +1,5179 @@
+repository,commit_hash,commit_date,message,mapped_release_tag,mapped_release_date,has_bug_keyword_in_message,has_bug_label,has_explicit_bug_label,is_backported,v0_baseline_tag,sensitivity_mode_active,population_N,sample_n,annotator_label,include_exclude,cooling_period_completed,audit_timestamp,inclusion_rule_triggered,exclusion_rule_triggered,annotation_notes,audit_round
+cirq,bf6b12b3fbd92d89266bdc2583d78d888e47720f,2018-05-24T16:47:19+00:00,"Fix MergeInteractions (#415)
+
+* Fix some numerical edge cases and improve doc strings
+
+* Correct MergeInteractions doc string
+
+* Move helper decomposition functions into module namespace
+
+* Add unit tests for two qubit decomposition
+
+* Satisfy typecheck
+
+* Small fix",v0.3.0,2018-07-18T06:41:35+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff: _is_trivial_angle now tests abs(abs(rad)-pi/4), so negative KAK angles were previously misclassified; mixed commit that also extracts helpers and edits docstrings, but the primary subject is the edge-case condition fix.",second_pass_audit
+cirq,28347b6535ea32fbeeb2c9b73c837c428f42db9d,2018-07-11T21:40:42+00:00,"Fix setup.py installing subpackages of 'cirq', but not cirq itself (#631)
+
+See https://github.com/quantumlib/OpenFermion-Cirq/pull/141#issuecomment-404301876",v0.3.0,2018-07-18T06:41:35+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,build_only,Diff touches only setup.py packaging (find_packages/py_modules); no library code changed.,second_pass_audit
+cirq,22ea9ef811200dbe2c588309405f6fa1428f56cf,2018-07-12T06:52:15+00:00,Fix trailing spaces on quantum_fourier_transform (#571),v0.3.0,2018-07-18T06:41:35+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,style_only,Diff removes trailing whitespace in examples/quantum_fourier_transform.py; no behavioural change.,second_pass_audit
+cirq,9d2f59df6d402130d4e85e309299ace37dc9c959,2018-07-17T01:45:12+00:00,"Work around index-limiting bug in np.eisnum (#687)
+
+- Just turn on optimize when 26 or more indices",v0.3.0,2018-07-18T06:41:35+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff passes optimize=len(all_indices)>=26 to np.einsum, working around a numpy failure on circuits with >=26 indices.",second_pass_audit
+cirq,5dc7f35e90801540fab5c7be9a185b179a0f5570,2018-07-18T00:44:10+00:00," Fix merge_interactions failing to convert into xmon gates (#696)
+
+- Updated the cost metric to include presence-of-non-xmon
+- Converting gates to xmon before returning
+
+Fixes https://github.com/quantumlib/Cirq/issues/490",v0.3.0,2018-07-18T06:41:35+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,Diff adds an xmon check and converter so MergeInteractions no longer emits non-xmon gates; closes Cirq issue #490.,second_pass_audit
+cirq,d7215359e0388571f2afb298988c1283ad7402cf,2018-11-07T02:42:06+00:00,"Fix `continuous-integration/check.sh --only=pytest2` failing under pytest 3.10 (#1117)
+
+See also https://github.com/pytest-dev/pytest/issues/4322
+Fixes https://github.com/quantumlib/Cirq/issues/1114",v0.4.0,2018-11-30T01:46:22+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,"Diff only touches dev_tools/check_pytest_v2.py, the CI pytest-2 compatibility checker.",second_pass_audit
+cirq,504733cdeeff1ca4cc9224a5c89f4adbad35ae5f,2018-11-14T00:53:55+00:00,"Derive cirq.YY and cirq.ZZ from cirq.XX and openfermioncirq.ZZ (#1151)
+
+- Move all three into cirq/ops/parity_gates.py
+- Add consistency tests
+- Fix SupportsDecompose[WithQubits] not being exported to top level
+- Modify consistency tests to vacuously succeed when functionality is not present",v0.4.0,2018-11-30T01:46:22+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff moves XX/YY/ZZ into cirq/ops/parity_gates.py and re-exports symbols; restructuring plus new consistency tests.,second_pass_audit
+cirq,0a8e688020169367eb60e663d91e5ba673717483,2018-12-13T21:05:13+00:00,"Add support for approximate equality to EigenGate and use it in decomposition tests. (#1229)
+
+This fixes numerical error errors which occur occasionally on some machines (macOS).
+
+EigenGate uses simple approximate comparison value-by-value, ignoring periodicity. Periodic aware comparison will be added separately.",v0.5.0,2019-04-24T03:10:06+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Sole production change is one line enabling approximate value equality on EigenGate purely to stabilise numerically sensitive decomposition tests on macOS.,second_pass_audit
+cirq,02a51345aeb2bbb17e9e4c17d33b7b58b7141f2a,2019-04-10T20:56:04+00:00,"Make automerge script keep going when an error is encountered (#1517)
+
+- Have been watching it long enough that I expect to have seen situations where this would cause continuous havoc, but haven't seen them",v0.5.0,2019-04-24T03:10:06+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,"Diff wraps duty_cycle in try/except in dev_tools/auto_merge.py, the merge-bot automation, not the SDK.",second_pass_audit
+cirq,5499dacd093a29c65b06975ad2a08facd9131d05,2019-06-24T22:53:42+00:00,"Fix some shellcheck warnings in 'get to repo root' script code (#1741)
+
+@fvkg mentioned this tool [shellcheck](https://www.shellcheck.net/). It produces a lot of useful warnings about our scripts, mostly related to undesired word splitting if strings happen to contain spaces.",v0.6.0,2019-10-30T20:53:31+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,"Diff only adds shell quoting in check/*, continuous-integration/* and dev_tools/* scripts to silence shellcheck.",second_pass_audit
+cirq,1aea962c1d53e26f21f088f451e336dce537a7df,2019-08-29T21:47:39+00:00,"Fix bugs in publish-dev-package and verify-published-package (#2052)
+
+- publish-dev-package had a missed script rename
+- verify-published-package was using cirq instead of cirq-dev",v0.6.0,2019-10-30T20:53:31+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,build_only,Diff corrects a renamed script and the cirq-dev package name in dev_tools/packaging release scripts.,second_pass_audit
+cirq,1d700df36b6afe36e9dc5f2f0f97918f3238f115,2019-10-15T22:30:57+00:00,Fix quirk parsing failing on floating point results (#2357),v0.6.0,2019-10-30T20:53:31+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,Diff reorders the free_symbols assertion in quirk parse.py so float/int results no longer trigger an attribute/assertion failure.,second_pass_audit
+cirq,8408f8959d6374eea0888f57e91ae0158b20d36d,2019-11-21T15:31:37+00:00,"Fix pytest (#2584)
+
+- check/pytest-changed-files is broken
+- The list of fils to test is put in quotes so it is considered to
+be one file by pytest rather than a list of files.",v0.7.0,2020-01-17T23:19:56+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,"Diff fixes quoting of the changed-file list in check/pytest-changed-files, a CI script.",second_pass_audit
+cirq,4dae9b2c766fb9cd5a24bce655020b63c0ed47ac,2020-02-05T20:28:33+00:00,Fix n-qubit state tomography (#2739),v0.8.0,2020-05-04T17:08:32+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff passes qubit_order=qubits when computing the rotation unitary, so the tomography matrix was previously built with the wrong qubit ordering.",second_pass_audit
+cirq,875132cf97190c016023c20958f69a675376a160,2020-02-24T23:49:40+00:00,"Attempt to fix flaky test by fixing random seed in n_qubit_tomography_test.py (#2758)
+
+It seems the test can be a bit flaky
+https://travis-ci.com/quantumlib/Cirq/jobs/285096296
+
+Happy to modify or outright withdraw if this is misguided.",v0.8.0,2020-05-04T17:08:32+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only fixes a random seed in n_qubit_tomography_test.py to stop flakiness.,second_pass_audit
+cirq,61b4259db3401afd224dd9eebc83617c93ac341d,2020-03-11T23:56:29+00:00,"Fix quantum engine gRPC path (#2833)
+
+- gRPC path was incorrectly changed to the cirq proto path (cirq.google.engine...)
+- It should be using the cloud path (google.cloud...)",v0.8.0,2020-05-04T17:08:32+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,regression_fix,,"Diff restores the google.cloud gRPC service paths that had been incorrectly changed to the cirq proto namespace, breaking all Quantum Engine RPCs.",second_pass_audit
+cirq,d1d203e2c736ec6d1098caa356413bd6bea9ba8a,2020-03-31T18:39:57+00:00,"Fix images in cirq docs (#2876)
+
+
+- Move images to _static directory",v0.8.0,2020-05-04T17:08:32+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only relocates two documentation images under docs/_static.,second_pass_audit
+cirq,7ec9e6f734d1aed2d7caf5989ac81294de8de8d1,2020-04-20T15:42:29+00:00,"Loosen tolerance restrictions in Quantum Engine (#2921)
+
+* Loosen tolerance restrictions in Quantum Engine
+
+- It looks like serialization and deserialization of
+floats can have an error up to around 5e-8, so loosening the
+restriction to 1e-6 to be safe, since this is only used to determine
+gates close to the desired gates.
+
+* Add comment to ATOL and make it a constant",v0.8.0,2020-05-04T17:08:32+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,Diff raises serializer tolerance to 1e-6 (_DEFAULT_ATOL) because float32 proto round-trips made valid gates fail the _near_mod_* checks.,second_pass_audit
+cirq,0915ac204591689cfc36c31d8ead69030b451829,2020-05-06T03:54:21+00:00,"Fix Problem with Y gates in Clifford Simulator (#2960)
+
+I found a bug in the Y gate for the tableau circuit simulator. Here is a fix and a test",v0.9.0,2020-10-01T18:14:18+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff changes self.rs ^= xs | zs to xs ^ zs in clifford_tableau._X, correcting the phase produced by Y in the stabilizer simulator.",second_pass_audit
+cirq,a344fb715995b00fa87bf9d2bef8aab04d076854,2020-05-20T16:52:34+00:00,"Add act_on protocol (#3019)
+
+- Add act_on_protocol.py
+- Add _act_on_ to MeasurementGate and ResetChannel
+- Add ActOnStateVectorArgs to represent state vector simulator state
+- Move logic out of sparse_simulator.py and into ActOnStateVectorArgs._fallback_act_on
+- Fix ApplyUnitaryArgs.subspace_index not forwarding shape information
+- Add allow_decompose to several protocol methods
+- Fix CliffordSimulator accepting measurements that may not be stabilizers
+- Fix _verify_unique_measurement_keys not using measurement_key**s**
+- Add test that terminal measurement simulations can have random results
+- with_gate now returns self if new_gate is gate
+- GateOperation now delegates protocols directly to its gate when possible",v0.9.0,2020-10-01T18:14:18+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff introduces the act_on protocol and ActOnStateVectorArgs and moves simulator logic; a feature/restructuring commit that mentions several incidental fixes.,second_pass_audit
+cirq,1aabcb7dac2dae2b5d63f512e4a84b8eec789ddf,2020-08-13T18:56:46+00:00,"Add initial support for converting Quil programs into Cirq circuits (#3211)
+
+This PR adds Quil import support in a way analogous to the existing QASM import functionality, by leveraging the Quil parser that already exists in pyQuil.
+
+By using `circuit_from_quil` from the `cirq.contrib.quil_import` module, all Quil standard gates, measurements, and simple (non-parameterized) DEFGATEs can be converted to Cirq operations (see below).
+
+Additionally adds Quil output for special cases of `TwoQubitDiagonalGate`, and fixes a bug in the way DEFGATE blocks were being generated by the Quil outputter.
+
+```python
+In [1]: from cirq.contrib.quil_import import circuit_from_quil
+
+In [2]: circuit_from_quil(""""""
+   ...: DECLARE ro BIT[3]
+   ...: I 0
+   ...: I 1
+   ...: I 2
+   ...: X 0
+   ...: Y 1
+   ...: Z 2
+   ...: H 0
+   ...: S 1
+   ...: T 2
+   ...: PHASE(pi/8) 0
+   ...: PHASE(pi/8) 1
+   ...: PHASE(pi/8) 2
+   ...: RX(pi/2) 0
+   ...: RY(pi/2) 1
+   ...: RZ(pi/2) 2
+   ...: CZ 0 1
+   ...: CNOT 1 2
+   ...: CPHASE(pi/2) 0 1
+   ...: SWAP 1 2
+   ...: ISWAP 0 1
+   ...: XY(pi/2) 1 2
+   ...: CCNOT 0 1 2
+   ...: CSWAP 0 1 2
+   ...: MEASURE 0 ro[0]
+   ...: MEASURE 1 ro[1]
+   ...: MEASURE 2 ro[2]
+   ...: """""")
+Out[2]:
+0: ───I───X───H───Z^(1/8)───Rx(0.5π)───@───────@───────────iSwap───────────────@───@───M('ro[0]')───
+                                       │       │           │                   │   │
+1: ───I───Y───S───Z^(1/8)───Ry(0.5π)───@───@───@^0.5───×───iSwap───iSwap───────@───×───M('ro[1]')───
+                                           │           │           │           │   │
+2: ───I───Z───T───Z^(1/8)───Rz(0.5π)───────X───────────×───────────iSwap^0.5───X───×───M('ro[2]')───
+
+In [3]: circuit_from_quil(""""""
+   ...: DEFGATE MYZ:
+   ...:     1,0
+   ...:     0,-1
+   ...:
+   ...: MYZ 0
+   ...: """""")
+Out[3]:
+      ┌     ┐
+0: ───│ 1  0│───
+      │ 0 -1│
+      └     ┘
+```
+
+Related to #1742, #2386, #2983",v0.9.0,2020-10-01T18:14:18+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,"Diff adds the cirq.contrib.quil_import package; a new feature, with an incidental DEFGATE indentation change.",second_pass_audit
+cirq,dd3df775a02d626103c011de7258374017c1cb42,2020-09-15T19:34:03+00:00,"Change MutablePauliString from private to public (#3299)
+
+- Fix pycharm warnings in pauli_string_test.py
+- Bump qiskit version [encountered load time error in pyton 3.8]
+- Add frozen/mutable_copy methods to cirq.PauliString
+- Add after/before methods to cirq.PauliString
+- Refactor MutablePauliString to construct from any PAULI_STRING_LIKE",v0.9.0,2020-10-01T18:14:18+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff promotes _MutablePauliString to the public MutablePauliString and reworks PauliString construction.,second_pass_audit
+cirq,ddb40716266fc554dd2817bc69baa8d1761a7191,2020-10-01T14:13:02+00:00,"Fix np.pad issue in numpy 1.16 (#3377)
+
+Cirq minimum requirement for numpy is 1.16.
+
+In 1.16, the mode parameter for np.pad is required.
+(It was changed to optional in numpy 1.17).
+
+Add this parameter in with the default value to support numpy 1.16.",v0.9.0,2020-10-01T18:14:18+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff adds the mode='constant' argument required by np.pad on numpy 1.16, which is Cirq's stated minimum and where the call raised.",second_pass_audit
+cirq,3468b27e7c47cfdb509f5f341e29c2ac64ff3aef,2020-10-06T22:17:40+00:00,"fix protobuf serialization test issue (#3400)
+
+Fix protobuf serialization test issue - as in some environments protobuf might not truncate to 4 bytes the test should cater for approximate equality.",fmt-black,2020-11-30T22:48:29+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only loosens assertions in cirq/google/arg_func_langs_test.py.,second_pass_audit
+cirq,e4c191d5d433a03464b6cd34a9c141285c84098f,2020-10-28T04:29:56+00:00,"Support ActOnStabilizerCHFormArgs in the common gates and testing (#3203)
+
+* Add ActOnStabilizerCHFormArgs and related logic
+
+* Some comment updates
+
+* Fix _update_sum call
+
+* Update parameterized condition
+
+* Undo already split out change to stabilizerstatechfrom
+
+* revert split out change
+
+* Merge and clean
+
+* Improve error handling and documentation
+
+* Add comments with reference to the relevant sections of the paper
+
+* Fix the year in copyright
+
+* Use H instead of HPowGate()
+
+* Address comments
+
+* Hide traceback and correct copyright year",fmt-black,2020-11-30T22:48:29+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds ActOnStabilizerCHFormArgs support to common gates and testing helpers; new capability rather than a defect fix.,second_pass_audit
+cirq,a913530b2785cbfaf606c404ef69fc19b5d97cd8,2020-10-29T18:53:36+00:00,"Fix typo in custom gates guide (#3468)
+
+@balopat I found a small typo when checking that the matrix equations rendered correctly (which they indeed do now).",fmt-black,2020-11-30T22:48:29+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff is a one-character typo fix in docs/custom_gates.ipynb.,second_pass_audit
+cirq,92e928e5d620691b3196d20f4b164af8a155c005,2020-11-25T21:16:24+00:00,"Fix type error in (X/Y)PowGate._act_on_ (#3533)
+
+There was a type error due to the fact that the common superclass `EigenGate`  does not define `_act_on_`. We can act on each gate instead of looping over them, which avoids the type error.",fmt-black,2020-11-30T22:48:29+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff extracts _act_with_gates to satisfy the static type checker; the runtime behaviour of _act_on_ is unchanged.,second_pass_audit
+cirq,16dd1bb210e930803efce4cdd32acfa7035a563f,2021-07-15T20:49:46+00:00,"better error messaging when deprecated module can't be imported (#4324)
+
+Adds better error messaging when deprecated module can't be imported.
+
+Now, `import cirq` prints zero warnings, even if there are errors importing the modules.
+Instead, when the deprecated modules are used, an informative error is thrown, including the root cause error: 
+
+When `cirq_pasqal` can't be imported, `import cirq.pasqal` results in: 
+
+```
+Traceback (most recent call last):
+  File ""/Users/balintp/dev/proj/Cirq/cirq-core/cirq/_compat.py"", line 590, in deprecated_submodule
+    new_module = importlib.import_module(new_module_name)
+  File ""/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/importlib/__init__.py"", line 127, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File ""<frozen importlib._bootstrap>"", line 1014, in _gcd_import
+  File ""<frozen importlib._bootstrap>"", line 991, in _find_and_load
+  File ""<frozen importlib._bootstrap>"", line 973, in _find_and_load_unlocked
+ModuleNotFoundError: No module named 'cirq_pasqal'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File ""<string>"", line 1, in <module>
+  File ""<frozen importlib._bootstrap>"", line 991, in _find_and_load
+  File ""<frozen importlib._bootstrap>"", line 971, in _find_and_load_unlocked
+  File ""<frozen importlib._bootstrap>"", line 914, in _find_spec
+  File ""/Users/balintp/dev/proj/Cirq/cirq-core/cirq/_compat.py"", line 504, in find_spec
+    raise self.broken_module_exception
+cirq._compat.DeprecatedModuleImportError: cirq_pasqal cannot be imported. The typical reasons are that
+ 1.) cirq_pasqal is not installed, or
+ 2.) when developing Cirq, you don't have your PYTHONPATH setup. In this case run `source dev_tools/pypath`.
+
+ You can check the detailed exception above for more details or run `import cirq_pasqal to reproduce the issue.
+
+```
+
+Note that `from cirq import pasqal` will still run and return a dummy module that will throw the same error when trying to access any of its attributes.
+
+Fixes #4106.
+Fixes https://github.com/quantumlib/Cirq/issues/4291.",v0.12.0,2021-08-11T21:41:28+00:00,1,1,1,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,"Diff replaces import-time warnings with a deferred, more informative error in _compat.deprecated_submodule; a diagnostics improvement.",second_pass_audit
+cirq,dc013726c9472d39bc2a3909208e188fb535e081,2021-07-19T13:30:03+00:00,"Attempt to Fix PauliSumCollector.collect_async warning under notebook(short-term solution) (#4004)
+
+* add nest_asyncio to solve collector under notebook environment
+
+* Fix the typo in clifford_gate::test_commutes_pauli
+
+* Revert ""Fix the typo in clifford_gate::test_commutes_pauli""
+
+This reverts commit b2d9269699d1e771f2b5b62a7e7273a59f0f6bc7.
+
+* Add warning above the cell
+
+* Fix for nit
+
+Co-authored-by: Cirq Bot <craiggidney+github+cirqbot@google.com>",v0.12.0,2021-08-11T21:41:28+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only adds a nest_asyncio cell and warning text to docs/operators_and_observables.ipynb.,second_pass_audit
+cirq,8d2f293a17bac6a97c7ba6d516c9a5189f2e2739,2021-08-11T19:49:36+00:00,"Auth fix for automerge (#4407)
+
+Temporary fix for #4405. 
+This needs a more serious refactor later - I would recommend actually just switching over to the python Github library.",v0.12.0,2021-08-11T21:41:28+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,Diff moves auto_merge.py off the removed access_token query parameter onto GithubRepository.get; merge-bot automation only.,second_pass_audit
+cirq,b1db3fa7c88c87665731f78d7b4f240c4c7b41d0,2021-08-19T23:51:26+00:00,"Fix MeasurementKey repr s.t. `eval(repr(k)) == k` (#4441)
+
+Fixes first part of #4440",v0.13.0,2021-10-15T17:28:33+00:00,1,1,1,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff quotes path/name in MeasurementKey.__repr__ so eval(repr(k))==k holds again, restoring the documented repr contract.",second_pass_audit
+cirq,d4717d890e986da40fa18836379d3fd8c103e2ef,2021-08-20T23:30:50+00:00,"Do not sort qubits by default in pauli_string to fix inconsistencies with pauli_string.gate (#4446)
+
+Fixes #4270
+
+Note that the fix relies on the fact that python dicts maintain insertion order from python 3.6+ [[link](https://stackoverflow.com/questions/39980323/are-dictionaries-ordered-in-python-3-6)]",v0.13.0,2021-10-15T17:28:33+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,Diff stops sorting PauliString.qubits so qubit order matches pauli_string.gate; fixes the qubit-ordering inconsistency in issue #4270.,second_pass_audit
+cirq,c8dca6bc462eb3c89863040a79b53f90a6aded12,2021-08-21T01:47:25+00:00,"Noise validate and docs (#4447)
+
+* preliminary implementation of just the physics channels for all metrics
+
+* cleaned up code a bit, initial physics implementation
+
+* consolidated p00/p11 to one channel, gets sycamore durations
+
+* separated measurement gates and others in fidelity
+
+* wrote tests to check individual metrics
+
+* added functionality to convert from Calibration to Fidelity and associated tests
+
+* functionality preliminarily finished, committing before splitting into 2 files
+
+* separated out calibration_to_fidelity and moved fidelity to cirq-core
+
+* apparently didn't commit the files properly in my last push
+
+* deleting old file locations
+
+* updated fidelity_test.py to improve coverage
+
+* moved calibration to fidelity files to cirq-google
+
+* addigng validate_calibration method
+
+* added validate_calibration and pauli average error
+
+* updated staged files & increased coverage
+
+* updated error messages and moved functions outside
+
+* updated comments as per suggestions
+
+* adjusted xeb fidelity from error, began validation code
+
+* tests are passing and improvied documentation
+
+* updated tutorial notebook and removed tests as recommended
+
+* cleared output in notebook
+
+* updated notebook as per comments
+
+* included tests for compare_generated_noise
+
+* tried to fix checks that fialed
+
+* updated test name and added TODO
+
+* fixed lint check
+
+* fixing coverage check by removing unecessary random seed
+
+* fixing format check
+
+* removed test because of flaking issue
+
+Co-authored-by: Ana Sofia Uzsoy <asuzsoy@google.com>
+Co-authored-by: Cirq Bot <craiggidney+github+cirqbot@google.com>",v0.13.0,2021-10-15T17:28:33+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Primary content is the new compare_generated_noise_to_metrics utility plus a noise notebook; carries an incidental xeb error/fidelity inversion correction.,second_pass_audit
+cirq,88be1ef1610d4d15c7b8f706fee24d396d707913,2021-09-29T20:05:55+00:00,"Fix broken path instructions in setting up a dev environment (#4519)
+
+For the add2virtualenv I could only figure out a way to do it in two steps (this was on mac running big sur).  If anyone has some shell foo to make this one line, that would be great.",v0.13.0,2021-10-15T17:28:33+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only edits docs/dev/development.md setup instructions.,second_pass_audit
+cirq,241695a3bb7dd696dfca1e992ceae5838ee95d4b,2021-10-04T02:59:52+00:00,"Acctually assert in kraus_protocol_test.py (#4546)
+
+Fix ineffective test in kraus_protocol_test.py by replacing `np.allclose` with `np.testing.assert_equal`. Also, some minor naming improvements and updates.",v0.13.0,2021-10-15T17:28:33+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff replaces np.allclose with assert_equal in kraus_protocol_test.py; sole production edit is a module docstring.,second_pass_audit
+cirq,83c440f09bdef5ebcf4b7f74121809014bc02ee0,2021-11-10T15:19:26+00:00,"Ensure subcircuit.mapped_circuit applies parent path if no repetitions (#4619)
+
+Fixes #4618
+
+Adds protocol `with_key_path_prefix` and uses this to correctly implement `mapped_circuit`, as outlined in the bug:
+
+> Currently the logic in mapped_circuit applies both the parent path and repetition key in a single step, and only if there's repetitions. Thus it misses the parent path if there's no repetitions. What we need is for mapped_circuit to apply the repetition prefix first (if there's repetitions), and then later apply the parent_path prefix independently, regardless of whether there are repetitions.
+> 
+> Pretty straightforward, but the complicating issue is that with_key_path replaces the path rather than prefixing the existing one, so that in the above solution, the second step would overwrite the first. So likely the fix for this will require creation and use of a new with_key_path_prefix protocol. This should also be fairly straightforward, but will require this protocol implementation in a number of places. (Open question of whether replacing the path is ever required. All use cases that come to mind are exclusively prefixing a path).
+
+Note this takes the simplification provided in #4611 as a baseline. We can either commit that first and then rebase this on top, or just kill that PR and replace it outright with this one.",v0.14.0,2022-03-24T06:26:34+00:00,1,1,1,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff adds _with_key_path_prefix_ and reorders mapped_circuit so the parent path is applied even without repetitions; measurement keys were previously wrong (issue #4618).,second_pass_audit
+cirq,d7611dc6a9b15dfafc203673072de8ce36767c82,2021-11-29T17:17:25+00:00,"Remove non-deterministic hash from circuit diagram. (#4712)
+
+* Remove non-deterministic hash from circuit diagram.
+
+* Fix CI issues.
+
+Co-authored-by: Nate Thompson <thanacles@google.com>",v0.14.0,2022-03-24T06:26:34+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff deletes FrozenCircuit.diagram_name, which embedded a run-dependent hash into circuit diagrams and made rendered output non-deterministic.",second_pass_audit
+cirq,2b2a6fed92374617b62c0373ecf9059c6dd166fb,2022-01-28T21:25:12+00:00,"Fix commutation of classical controls (#4872)
+
+* Fix commutation of classical controls
+
+* Add moment.control_keys protocol
+
+* Improve handling of classical controls in commutation
+
+* move align tests",v0.14.0,2022-03-24T06:26:34+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff adds control_keys checks to Moment/raw_types._commutes_ and Circuit._prev_moment_available, so classically controlled ops no longer commute past their measurement.",second_pass_audit
+cirq,2f2c7ca766551e733a4b13483ea299b8abdab78c,2022-02-02T16:17:40+00:00,"Add state conversion logic from _create_partial_act_on_args to the corresponding ActOnArgs (#4847)
+
+* Move _create_partial_act_on_args to ActOnArgs
+
+* Add with_qubit to ActOnArgs
+
+* Fix CI errors
+
+* Merge initial_state into target_tenson
+
+Also change some import directives.
+
+* Change back a variable name
+
+* Fix coverage error
+
+* Move dtype to the last parameter
+
+* Add state_vector_kronecker_product to __init__.py
+
+* Remove logic from density_matrix_simulator._create_partial_act_on
+
+* Remove logic from sparse_simulator._create_partial_act_on_args
+
+* Remove logic from clifford_simulator._create_partial_act_on_args
+
+Also deprecate positional argument in ActOnStabilizerCHFormArgs.__init__.
+
+* Deprecate positional arguments in ActOnArgs subclasses
+
+* Fix format
+
+* Merge state into initial_state and deprecate state
+
+* Fix format
+
+* Add test cases for positional arguments",v0.14.0,2022-03-24T06:26:34+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff moves _create_partial_act_on_args state construction into ActOnArgs subclasses and deprecates positional args.,second_pass_audit
+cirq,7e78526953ce86371587f3e6683ade0cfcfeb9ef,2022-02-15T06:53:38+00:00,"Bump follow-redirects from 1.14.7 to 1.14.8 in /cirq-web/cirq_ts (#4993)
+
+Bumps [follow-redirects](https://github.com/follow-redirects/follow-redirects) from 1.14.7 to 1.14.8.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/follow-redirects/follow-redirects/commit/3d81dc3237b4ffe8b722bb3d1c70a7866657166e""><code>3d81dc3</code></a> Release version 1.14.8 of the npm package.</li>
+<li><a href=""https://github.com/follow-redirects/follow-redirects/commit/62e546a99c07c3ee5e4e0718c84a6ca127c5c445""><code>62e546a</code></a> Drop confidential headers across schemes.</li>
+<li>See full diff in <a href=""https://github.com/follow-redirects/follow-redirects/compare/v1.14.7...v1.14.8"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=follow-redirects&package-manager=npm_and_yarn&previous-version=1.14.7&new-version=1.14.8)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/quantumlib/Cirq/network/alerts).
+
+</details>",v0.14.0,2022-03-24T06:26:34+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Dependabot bump of follow-redirects in cirq-web/cirq_ts; only package-lock.json changed.,second_pass_audit
+cirq,1184a3fb7e757159f4db6a57f8bbf1475fe2c77a,2022-03-24T20:37:38+00:00,"Bump minimist from 1.2.5 to 1.2.6 in /cirq-web/cirq_ts (#5140)
+
+Bumps [minimist](https://github.com/substack/minimist) from 1.2.5 to 1.2.6.
+<details>
+<summary>Commits</summary>
+<ul>
+<li><a href=""https://github.com/substack/minimist/commit/7efb22a518b53b06f5b02a1038a88bd6290c2846""><code>7efb22a</code></a> 1.2.6</li>
+<li><a href=""https://github.com/substack/minimist/commit/ef88b9325f77b5ee643ccfc97e2ebda577e4c4e2""><code>ef88b93</code></a> security notice for additional prototype pollution issue</li>
+<li><a href=""https://github.com/substack/minimist/commit/c2b981977fa834b223b408cfb860f933c9811e4d""><code>c2b9819</code></a> isConstructorOrProto adapted from PR</li>
+<li><a href=""https://github.com/substack/minimist/commit/bc8ecee43875261f4f17eb20b1243d3ed15e70eb""><code>bc8ecee</code></a> test from prototype pollution PR</li>
+<li>See full diff in <a href=""https://github.com/substack/minimist/compare/1.2.5...1.2.6"">compare view</a></li>
+</ul>
+</details>
+<br />
+
+
+[![Dependabot compatibility score](https://dependabot-badges.githubapp.com/badges/compatibility_score?dependency-name=minimist&package-manager=npm_and_yarn&previous-version=1.2.5&new-version=1.2.6)](https://docs.github.com/en/github/managing-security-vulnerabilities/about-dependabot-security-updates#about-compatibility-scores)
+
+Dependabot will resolve any conflicts with this PR as long as you don't alter it yourself. You can also trigger a rebase manually by commenting `@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating it. You can achieve the same result by closing it manually
+- `@dependabot ignore this major version` will close this PR and stop Dependabot creating any more for this major version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop Dependabot creating any more for this minor version (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop Dependabot creating any more for this dependency (unless you reopen the PR or upgrade to it yourself)
+- `@dependabot use these labels` will set the current labels as the default for future PRs for this repo and language
+- `@dependabot use these reviewers` will set the current reviewers as the default for future PRs for this repo and language
+- `@dependabot use these assignees` will set the current assignees as the default for future PRs for this repo and language
+- `@dependabot use this milestone` will set the current milestone as the default for future PRs for this repo and language
+
+You can disable automated security fix PRs for this repo from the [Security Alerts page](https://github.com/quantumlib/Cirq/network/alerts).
+
+</details>",v0.15.0,2022-06-29T00:24:58+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Dependabot bump of minimist in cirq-web/cirq_ts; only package-lock.json changed.,second_pass_audit
+cirq,88608ed9b045333a58e6ee3620386db77c059cc8,2022-04-07T00:37:50+00:00,"Fix basics (#5180)
+
+Cleans up basics.ipynb and removes mention of old devices behavior.",v0.15.0,2022-06-29T00:24:58+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only rewrites docs/tutorials/basics.ipynb.,second_pass_audit
+cirq,dd0854cf711ac073a1fd1ef37c7dab404e6a672d,2022-06-10T19:26:37+00:00,"Fix WaitGate parameter resolution with multiple qubits (#5478)
+
+Fixes #5477
+Review: @viathor",v0.15.0,2022-06-29T00:24:58+00:00,1,1,1,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff forwards qid_shape through WaitGate._resolve_parameters_, so resolving parameters no longer silently returns a gate acting on a different number of qubits (issue #5477).",second_pass_audit
+cirq,e5a11b6fd77199f1655c7087267bb660ee349be7,2022-08-31T22:10:57+00:00,"Fix docstring for `cirq.map_operations` (#5849)
+
+* Fix docstrings for cirq.map_operations",v1.1.0,2022-12-20T22:50:11+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only corrects docstrings of map_operations/map_operations_and_unroll.,second_pass_audit
+cirq,8b97aa5d8f90d48e41dabaddf3c2b56ec1d2bddd,2023-03-07T01:48:09+00:00,"Bump node-fetch and puppeteer in /cirq-web/cirq_ts (#5998)
+
+* Bump node-fetch and puppeteer in /cirq-web/cirq_ts
+
+Bumps [node-fetch](https://github.com/node-fetch/node-fetch) to 2.6.9 and updates ancestor dependency [puppeteer](https://github.com/puppeteer/puppeteer). These dependencies need to be updated together.
+
+
+Updates `node-fetch` from 2.6.1 to 2.6.9
+- [Release notes](https://github.com/node-fetch/node-fetch/releases)
+- [Commits](https://github.com/node-fetch/node-fetch/compare/v2.6.1...v2.6.9)
+
+Updates `puppeteer` from 10.0.0 to 19.6.3
+- [Release notes](https://github.com/puppeteer/puppeteer/releases)
+- [Changelog](https://github.com/puppeteer/puppeteer/blob/main/release-please-config.json)
+- [Commits](https://github.com/puppeteer/puppeteer/compare/v10.0.0...puppeteer-v19.6.3)
+
+---
+updated-dependencies:
+- dependency-name: node-fetch
+  dependency-type: indirect
+- dependency-name: puppeteer
+  dependency-type: direct:development
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+* Updated ""expected"" images for screenshot tests.
+
+* dropme - show node.js version active on github CI
+
+* CI - add missing setup-node for typescript tests
+
+* CI - use actions/checkout@v3 for typescript tests
+
+* Revert ""Updated ""expected"" images for screenshot tests.""
+
+Check if original expected PNGs would work on GHA.
+
+This reverts commit 5599798cb603641f4ddf31d1c82d8d3215adba0d.
+
+* Revert ""Revert ""Updated ""expected"" images for screenshot tests.""""
+
+No joy - back to the updated PNGs.
+
+This reverts commit 4cf21fd8452457809def448930c413a94cebe0d3.
+
+* dropme: is there anything suspicious in puppeteer dependencies?
+
+* Add logic that saves actual png and diff png to the directory. From a local run I can see that that the diff comes from the black/dark gray pixels.
+
+* fix ts-lint formatting
+
+* update the expected images with the ones generated from my macOS. The text symbols had been slightly darker and more bold (from a chrome update I suspect) causing the pixelmatcher to fail. This now passes locally on my macOS.
+
+* Log base64 encoding of captured images by GHA's run environment so they can be reconstructed to PNGs.
+
+* Update expected images using the pngs generated from base64 encodings of the GHA run.
+
+* restore .ts files back to their contents in master
+
+* Add missing import statement and remove debug statements and TODOs.
+
+---------
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: William Courtney <wcourtney@google.com>
+Co-authored-by: Pavol Juhas <juhas@google.com>
+Co-authored-by: Victory Omole <vtomole2@gmail.com>
+Co-authored-by: Seneca Meeks <senecacmeeks@gmail.com>
+Co-authored-by: Tanuj Khattar <tanujkhattar@google.com>",v1.2.0,2023-07-17T23:57:08+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Dependabot bump of node-fetch/puppeteer; only lockfiles and regenerated e2e reference screenshots changed.,second_pass_audit
+cirq,ed26d2f7ecf48b4f801e39603047a1a3c7d85632,2023-08-25T22:43:09+00:00,Fix ordering issue in random_rotations_between_grid_interaction_layers_circuit (#6261),v1.3.0,2023-12-01T21:12:10+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff changes the layer membership test to '(a,b) in layer or (b,a) in layer', fixing pair ordering in random grid-interaction circuit generation.",second_pass_audit
+cirq,eddb2d9cbdf55576c6e7532e0a25b40995d889dd,2023-09-06T02:08:32+00:00,"Add caching to `value_equality_values` decorator for auto generated methods. (#6275)
+
+* Add caching to value_equality_values decorator for auto generated methods.
+
+* Fix pylint and formatting errors
+
+* Address nits, fix bugs and make PauliSum unhashable",v1.3.0,2023-12-01T21:12:10+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,performance_only,Diff caches _value_equality_values_ and __hash__ via _compat.cached_method; an optimisation of equality checks.,second_pass_audit
+cirq,60ab3c0ac1cde483a31e637eef5d7cde8f1b2b0c,2024-08-01T16:37:38+00:00,"Eliminate awful slowdown of `EigenGate._value_equality_values_` (#6695)
+
+Problem: The `sympy.Expr.is_constant()` introduced in #6669 is very
+slow causing glacial-speed equality checks of parameterized gates.
+
+Solution: Check if expression is sympy.Number instead which still
+satisfies the equality fix added in #6669.
+
+Timing of
+  check/pytest --numprocesses=0 --randomly-seed=0 \
+    cirq-core/cirq/transformers/analytical_decompositions/two_qubit_to_sqrt_iswap_test.py
+Before: 945 s   After: 18 s,  Before #6669: 18 s.",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,performance_only,Diff swaps sympy is_constant() for an isinstance(sympy.Number) test purely to remove a 50x slowdown.,second_pass_audit
+cirq,25b336215ff2b9e40224266fd9b9bf22c0e19f58,2025-01-08T14:56:55+00:00,"Fix diagram for Identity with no qubits (#6926)
+
+* Fix diagram for Identity with no qubits
+
+- An IdentityGate with 0 qubits used to raise an exception
+in the circuit drawer.
+- This PR fixes the issue and displays the gate similar to a
+GlobalPhaseGate.
+
+Fixes: #6768",v1.5.0,2025-04-10T03:14:52+00:00,1,1,1,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff guards num_qubits()<=0 and requires info.wire_symbols, so drawing a zero-qubit IdentityGate no longer raises (issue #6768).",second_pass_audit
+cirq,be8b04b292dc717b390b012183ddc16d0fcf57af,2025-01-15T19:42:46+00:00,"Pass `sweep_transformer` recursively (#6951)
+
+* fix bug
+
+* rm print",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff forwards sweep_transformer through the recursive sweep_to_proto/sweep_from_proto calls; nested sweeps were previously left untransformed.,second_pass_audit
+cirq,bc9fc97cd6d96a341c107fa7a94a74931e5eac13,2025-02-12T19:10:15+00:00,"Improve the readability of CliffordTableau _full_str_ function (#7047)
+
+* Improve the readability of Tableau str.
+
+* Apply comments.
+
+* Fix coverage
+
+* Nit - rename internal functions to start with underscore
+
+* Fix matching of np.bool values by converting them to stock bool
+
+Avoid possibility of unmatched values, because bool can return
+only the `True` or `False` singletons.
+
+* Rewrite string formatting with f-string
+
+We can appease pylint without line exception.
+
+---------
+
+Co-authored-by: Pavol Juhas <juhas@google.com>",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff rewrites CliffordTableau.__str__ formatting with f-strings and helper functions; rendering content unchanged.,second_pass_audit
+cirq,e60e686b216261a2a8f0dab21a9070a1d0b5f163,2025-02-28T18:51:13+00:00,"Improve GitHub issue templates (#7087)
+
+* Edit and (try to) improve issue templates
+
+The edits here are an attempt to do the following:
+
+- Use Markdown section headings instead of `**` bold facing text
+- Remove some redundant sections
+- Make the descriptions and headings all follow the same style
+- Try to make the text slightly more clear in a few places
+
+This partly half of #6972. The other half (using issue forms) can be
+left for some later date.
+
+* Use explicit line breaks
+
+* Add language declarations to Markdown code blocks
+
+* Fix several code block language declarations
+
+Fixed errors spotted by @pavoljuhas in review comments on
+PR #7087.",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only rewrites .github/ISSUE_TEMPLATE markdown files.,second_pass_audit
+cirq,b3af2ee3aaab9ef96557c08a6eff528f7b0f782a,2025-03-11T22:44:26+00:00,"Fix nondeterminacy in Circuit.insert (simplified) (#7043)
+
+* Fix nondeterminacy and a couple other issues in Circuit.insert
+
+* code comments
+
+* code comments
+
+* code comments
+
+* test1 and test7 reverted
+
+* remove no longer relevant new tests
+
+* Update cirq-core/cirq/circuits/circuit.py
+
+Co-authored-by: Pavol Juhas <pavol.juhas@gmail.com>
+
+* Update circuit.py
+
+* Put back the last line of docstring
+
+---------
+
+Co-authored-by: Pavol Juhas <juhas@google.com>
+Co-authored-by: Pavol Juhas <pavol.juhas@gmail.com>",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff rewrites Circuit.insert's moment selection to remove non-deterministic placement, so the same insert no longer yields different circuits across runs.",second_pass_audit
+cirq,8a3d1ef9eb86e393b0030934e6c58f1f9d4950ca,2025-03-31T18:49:12+00:00,"Create a new condition that allows easy control by bitmasks and Add a new classical Update the notebook for 'Classical control' to reflect new features"" (#7166)
+
+* Create a new condition that allows easy control by bitmasks
+
+* add tests
+
+* docstring
+
+* add missing files
+
+* swith from dataclasses to attrs
+
+* mypy
+
+* Update the notebook for 'Classical control' to reflect new features
+
+* nit
+
+* nit
+
+* tests
+
+* nit
+
+* fix doc regex
+
+* format
+
+* address comments
+
+* lint",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds the new BitMaskKeyCondition class with serialisation support; a feature addition.,second_pass_audit
+cirq,17ddcdf5e32424c265ebde49bed8e627ada54a56,2025-04-03T05:47:07+00:00,"Use a different action for size labeler GHA (#7219)
+
+* Use a different action for size labeler GHA
+
+The previous labeler was buggy and poorly written.
+
+* Need set permissions for id-token
+
+* Update .github/pr-size-labels.yaml
+
+Co-authored-by: Pavol Juhas <pavol.juhas@gmail.com>
+
+* Widen the scope of excluded package-lock.json files
+
+* Improve explanation of how the settings work
+
+* Don't fail the workflow if labeling fails
+
+* Invoke the labeler program directly
+
+There is no way to get the error messages from the labeler action. We
+need to get the output if we want to note that something failed
+without failing the whole workflow. Thankfully, the action can be
+invoked more directly using `podman`, and it's not hard to revise the
+workflow to capture the output and write it as an annotation on the
+summary page.
+
+* Clarify comments some more
+
+---------
+
+Co-authored-by: Pavol Juhas <pavol.juhas@gmail.com>",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,Diff only replaces the PR size-labeler GitHub Actions workflow.,second_pass_audit
+cirq,cc4f208dafbf883ca956104c055c388bb9c387db,2025-04-09T04:33:11+00:00,"Correct minor typo in BitMaskKeyCondition (#7251)
+
+* Correct minor typo in BitMaskKeyCondition
+
+- Noticed it while using the example code.
+
+* Fix the same typo in a notebook
+
+* Typo - transfomer -> transformer
+
+---------
+
+Co-authored-by: Michael Hucka <mhucka@caltech.edu>
+Co-authored-by: Pavol Juhas <juhas@google.com>",v1.5.0,2025-04-10T03:14:52+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff corrects 'BitMaskKeycondition' spelling in a docstring example and three notebooks.,second_pass_audit
+cirq,11c769d78f7d85d9177618a9dfc8724be8c14cc0,2025-07-21T21:11:26+00:00,"Add clarification to GridQubit neighbors function (#7521)
+
+- An internal bug noted that there could be confusion if you assumed
+that GridQubit.neighbors() returned only the neighbors on a specific
+device layout.
+- This changes only the documentation to point out that this function is
+device-agnostic.
+
+---------
+
+Co-authored-by: Pavol Juhas <pavol.juhas@gmail.com>",v1.6.0,2025-07-23T03:45:54+00:00,1,0,0,1,v0.1,0,1079,284,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only expands the GridQubit.neighbors docstring to note it is device-agnostic.,second_pass_audit
+pennylane,7575ecb80a9535545da615340468dec93a02d343,2022-08-12T12:33:38+00:00,"Daily rc sync to master 2022-08-12 (#2940)
+
+* Update the Hermiticity check of `qml.Hermitian` to use `qml.math` (#2895)
+
+* fix
+
+* changelog
+
+* lint
+
+* important typo fix (#2901)
+
+* test lightning (#2903)
+
+* Update the readme and PennyLane Logo (#2912)
+
+* Update PennyLane Logo
+
+* remove wordmark from readme
+
+* update citation
+
+* et al
+
+* Update the logo
+
+* replace with svg
+
+* Add warning to `qml.cond` docs about unsupported cases (#2883)
+
+* docs
+
+* docs
+
+* `qml.simplify` can reduce number of rotation parameters (#2905)
+
+* move rotation simplify into op method
+
+* add additional example
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* seed and flaky (#2917)
+
+* Fixes a bug where kUpCCGSD wasn't working with the parameter-shift rule (#2913)
+
+* First commit
+
+* Added PR link
+
+* More accurate description in changelog
+
+* Test PS rule against backprop
+
+* Fixed error with test
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Add module documentation for `ops` (#2730)
+
+* Update phase decomp test (#2697)
+
+* Update interfaces.rst (#2698)
+
+* Allow templates to be decomposed (#2704)
+
+* Allow templates to be decomposed
+
+* Add TODO to clean
+
+* Update changelog
+
+* Fix pylint error
+
+Co-authored-by: Edward Jiang <edward.jiang@resident.xanadu.ai>
+
+* Deprecate `qml.ExpvalCost` (#2571)
+
+* Add UserWarning to ExpvalCost and catch said warning in all tests containing ExpvalCost
+
+* added warning in doc string
+
+* added to the changelog in 0.23.1
+
+* Update pennylane/vqe/vqe.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update pennylane/vqe/vqe.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update pennylane/vqe/vqe.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update pennylane/vqe/vqe.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update tests/optimize/test_qng.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update tests/qchem/of_tests/test_convert.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update tests/test_qaoa.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update tests/test_vqe.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update tests/transforms/test_adjoint_metric_tensor.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update tests/optimize/test_optimize_shot_adapative.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* overlooked to catch the new warning in test_dipole_of
+
+* switched to the right changelog
+
+Co-authored-by: Qottmann <qottmann@LT0290.ad.icfo.net>
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Update JAX jit forward mode forward evaluation (#2700)
+
+* update logic
+
+* update logic
+
+* test case
+
+* test assertion
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Improve ising gates documentation (#2711)
+
+* Update doc
+
+* Update
+
+* Update pennylane/ops/qubit/parametric_ops.py
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Apply suggestions from code review
+
+* CHange
+
+* Typo
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Support classical fisher gradients when using Autograd (#2688)
+
+* Support classical fisher gradients when using Autograd
+
+* Update doc/releases/changelog-dev.md
+
+* added test for jax and autograd
+
+* black
+
+* added xfail tests
+
+* added comment in doc string about torch and tf not diffable
+
+Co-authored-by: Qottmann <korbinian.kottmann@gmail.com>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Support classical Fisher gradients when using TF and torch (#2710)
+
+* Support classical fisher gradients when using Autograd
+
+* Update doc/releases/changelog-dev.md
+
+* added test for jax and autograd
+
+* black
+
+* added xfail tests
+
+* added comment in doc string about torch and tf not diffable
+
+* Fix differentiability for tensorflow and torch
+
+* Remove warning
+
+* Fix TF not iterable error
+
+* Trigger CI
+
+* added example in doc-string about diffability
+
+* close-block becomes code-block lol
+
+* Update pennylane/qinfo/transforms.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Change pytest mark
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Qottmann <korbinian.kottmann@gmail.com>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Remove `hardware` argument in `qml.qinfo.quantum_fisher` (#2695)
+
+* removed hardware argument, adapted doc string
+
+* updated tests
+
+* black
+
+* Update pennylane/qinfo/transforms.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* Update pennylane/qinfo/transforms.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* add default.qubit condition and change doc string
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Add `qinfo` measurements in supported configurations docs (#2712)
+
+* Add documentation for new qinfo measurements
+
+* Add docs for finite diff
+
+* Fix JAX tests
+
+* Change param shift to red
+
+* Move entropy param shift tests
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Use access_state (#2719)
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Update docs v0.24 (#2724)
+
+* private func has no indices arg
+
+* update the circuit name in the example
+
+* reduced_dm doc update
+
+* correct Hamiltonian creation for classical Fisher
+
+* Delete exactly one space from reduced_dm docstring to correct rendering
+
+* Update outputting quantum_fisher example
+
+* Move summary to start (#2727)
+
+* add ops module section
+
+* only include functions and op_math
+
+* added weights initialization example (#2735)
+
+* Wires not updated for a hamiltonian with in-place addition (#2738)
+
+* fixed hamiltonian wire bug
+
+* changelog
+
+* try other way
+
+* Cleanup docs (#2736)
+
+* Documentation changes for `batch_partial` (#2737)
+
+* Update docs
+
+* Add double backticks
+
+* Add other backtick :xd:
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* Fix sphinx class/method links (#2729)
+
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>
+
+* trying something else
+
+* Fix rendering of matrix rep of ECR (#2741)
+
+* fix rendering of matrix rep of ECR
+
+* lint
+
+* trigger ci
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Fix doc quantum information and ising (#2732)
+
+* Ising doc
+
+* Move entropy test
+
+* Math doc
+
+* Measurement doc
+
+* qinfo doc
+
+* Update pennylane/qinfo/transforms.py
+
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+
+* Apply suggestions from code review
+
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+
+* Update pennylane/math/quantum.py
+
+* Update
+
+* Fix kwargs for fidelity (#2740)
+
+* update
+
+* Typo
+
+* Update pennylane/qinfo/transforms.py
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* Reduced dm
+
+* Apply suggestions from code review
+
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+
+* remove reduce dm
+
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* hope
+
+* Add quantum info measurements to introduction doc page (#2734)
+
+* add quantum info measurements to introduction page
+
+* minor doc fixes
+
+* more minor fixes
+
+* revert kwargs change
+
+* Apply suggestions from code review
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* maybe this time
+
+* probably not going to work but worth a try
+
+* Apply suggestions from code review
+
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>
+
+* update with master
+
+* updates
+
+* merge something
+
+* update docstring
+
+* line length problem
+
+* fix controlled signature
+
+* fix s_prod
+
+* add control class notes
+
+* update docs for Sprod and Sum
+
+* typo
+
+* small fix
+
+* fixing docs
+
+* added pragma no-cover to signature property
+
+* Apply suggestions from code review
+
+* clean up
+
+* fix sprod demo
+
+* add info to quick start operations guide
+
+* typo
+
+* added example
+
+* re-link top level imports to prevent duplication of docstring pages generated by sphinx
+
+* typo
+
+* change constructor imports to toplevel
+
+* Apply suggestions from code review
+
+* add equal to ops.functions docstring
+
+* Update doc/introduction/operations.rst
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Update pennylane/ops/op_math/controlled_class.py
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Update pennylane/ops/op_math/sum.py
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* lint
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+Co-authored-by: Edward Jiang <edward.jiang@resident.xanadu.ai>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Qottmann <qottmann@LT0290.ad.icfo.net>
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: Qottmann <korbinian.kottmann@gmail.com>
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>
+Co-authored-by: David Ittah <dime10@users.noreply.github.com>
+
+* Fix check batching bug (#2900)
+
+* check batching only if batching supported
+
+* Update doc/releases/changelog-0.25.0.md
+
+* just change op arithmetic properties
+
+* just raise errors
+
+* Update pennylane/operation.py
+
+* modify has_matrix and matrix
+
+* remove test
+
+* Update tests/ops/op_math/test_controlled_op.py
+
+* Update tests/ops/op_math/test_sprod.py
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* prod tests, controlled name
+
+* more interface tests
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* Update development guide to explain `dev.stopping.condition` (#2925)
+
+* update developer docs to reflect default qubit change
+
+* typo
+
+* Update doc/development/adding_operators.rst
+
+* add code examples
+
+* Fix test randomness for `ShotAdaptiveOptimizer` (#2929)
+
+* return types
+
+* Update test
+
+* Typo
+
+* State finite shots warn (#2918)
+
+* first draft to gauge test failures
+
+* skip config tests when finite shots and state based return
+
+* skip tape shape test cases
+
+* device test
+
+* updated device test
+
+* new return types tests
+
+* remove errors, catch the warnings
+
+* changelog
+
+* run tests
+
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+
+* Add a test for logic that accidentally got in untested (#2930)
+
+* add test
+
+* Trigger CI
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* Fix symbolic `Controlled` operator documentation (#2934)
+
+* Minor documentation fixes (#2933)
+
+* native instead of propriertary
+
+* misc documentation fixes
+
+* Update doc/introduction/measurements.rst
+
+* remove do_queue from adjoint docstring
+
+* exclude files from pr
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+Co-authored-by: Edward Jiang <edward.jiang@resident.xanadu.ai>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Qottmann <qottmann@LT0290.ad.icfo.net>
+Co-authored-by: Qottmann <korbinian.kottmann@gmail.com>
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>
+Co-authored-by: David Ittah <dime10@users.noreply.github.com>
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+Co-authored-by: GitHub Actions Bot <>",v0.26.0,2022-09-19T17:44:56+00:00,1,1,1,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,"Release-candidate sync commit bundling many unrelated PRs; production edits are shot-count warnings and docs, not a single defect fix.",second_pass_audit
+pennylane,40fcbc274b3f013eed62620b2eae1c0c4d482349,2022-09-09T16:06:09+00:00,"Add `qml.pow` constructor (#3029)
+
+* add pow constructor
+
+* tests, docs, changelog
+
+* fix sphinx issue
+
+* code review
+
+* update warnings and changelog for inversion deprecation
+
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>",v0.26.0,2022-09-19T17:44:56+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds the qml.pow constructor and re-exports it; a feature addition.,second_pass_audit
+pennylane,bebc2f410c20097989a28b506d6b6606b8926441,2022-09-15T16:36:38+00:00,"Daily rc sync to master 2022-09-15 (#3062)
+
+* compute math.dot when num_wires > 11 (#3046)
+
+* flaky test_single_argument_step (#3055)
+
+* `Exp` matrix computation bugfix (#3057)
+
+* Incrementing the version number to `v0.27.0-dev` (#3044)
+
+* Update
+
+* Bump
+
+* re-add dev changelog
+
+* Update doc/development/release_notes.md
+
+* docs section
+
+* flaky test_single_argument_step
+
+Co-authored-by: Antal Szava <antalszava@gmail.com>
+
+* fix exp bug
+
+* rebase onto release candidate
+
+* Update doc/releases/changelog-0.26.0.md
+
+* Update tests/optimize/test_optimize_shot_adapative.py
+
+* add additional test parametrization
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: Antal Szava <antalszava@gmail.com>
+
+* exclude files from pr
+
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+Co-authored-by: antalszava <antalszava@gmail.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: GitHub Actions Bot <>",v0.26.0-postfix,2022-09-26T19:10:34+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Although titled as an rc sync, the only production change is the Exp matrix bugfix: diagonalizing_gates is now built with wire_order and the no-gate case uses eigvals, correcting the computed matrix.",second_pass_audit
+pennylane,1aa7df30f5d7fa8317f7e1863c53a3a73aacb6b0,2022-09-20T18:59:11+00:00,"move `stop_recording` to `qml.queuing` (#3068)
+
+* move stop_recording to qml.queuing
+
+* Update doc/releases/changelog-dev.md
+
+* Update doc/releases/changelog-dev.md
+
+* minor changes
+
+* CI fixes, also deprecate get_active_tape
+
+* import toplevel, remove alias
+
+* rename queuingcontext to queuingmanager
+
+* fix failing tests
+
+* Apply suggestions from code review
+
+* change how qml.tape.stop_recording is
+
+* update docstring
+
+* change indent
+
+* Apply suggestions from code review
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+Co-authored-by: antalszava <antalszava@gmail.com>",v0.26.0-postfix,2022-09-26T19:10:34+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff moves stop_recording onto QueuingManager and updates ~18 call sites.,second_pass_audit
+pennylane,0cf1bd418a7e3b8737c6a8eabfb1d263dd7e72b9,2022-09-30T16:31:41+00:00,"Fix `qml.transforms.transpile` for ops with `AnyWires` acting on two-qubits (#3104)
+
+* fix 1 wire case check condition
+
+* changelog
+
+* changelog
+
+* raise error
+
+* check based on len(op.wires) instead of num_wires
+
+* trigger CI",v0.27.0,2022-11-14T21:33:49+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff replaces the op.num_wires!=2 test with len(op.wires)==1 and raises for >2-wire ops, fixing transpile for AnyWires operators acting on two qubits.",second_pass_audit
+pennylane,011fe74a8b715db28eaf40ef9c2ed11095402d43,2022-11-04T01:20:11+00:00,"[Return-types #10] TensorFlow integration  (#3222)
+
+* Tensorflow integration
+
+* Add missing coverage
+
+* remove unnecessary cast
+
+* Apply suggestions from code review
+
+Co-authored-by: antalszava <antalszava@gmail.com>
+
+* Address most PR comments
+
+* Fix ragged differentiation
+
+* pylint
+
+* Add docstrings and some cleanup
+
+* Also check contents of cache
+
+* Remove backprop change
+
+* Fix tests too
+
+* Update tests
+
+* Rename
+
+* Add hessian test back
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: antalszava <antalszava@gmail.com>",v0.27.0,2022-11-14T21:33:49+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds the new-return-types TensorFlow interface; a feature addition.,second_pass_audit
+pennylane,96d4f74e882046c373f84a4c4a87d413d59c99c4,2022-11-04T18:59:40+00:00,"Make requirements for data module optional (#3257)
+
+* attempt to remove zstd dill from requirements
+
+* format 3.10 as `3.10`
+
+* black fix
+
+* fix codefactor
+
+* fix black
+
+* add `pytestmark`
+
+* add marker in `pytest.ini`
+
+* add tests for `_import_zstd_dill`
+
+* add codecov lines
+
+* remove dill and zstd from setup.py
+
+* update error match
+
+* empty commit for CI
+
+* make codecov happy
+
+* Update pennylane/data/dataset.py
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+
+* empty commit for CI
+
+* empty commit for CI
+
+* add note in docs
+
+* Update doc/introduction/data.rst
+
+Co-authored-by: Diego <67476785+DSGuala@users.noreply.github.com>
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Chae-Yeun Park <chae-yeun@xanadu.ai>
+Co-authored-by: Diego <67476785+DSGuala@users.noreply.github.com>",v0.27.0,2022-11-14T21:33:49+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Diff removes zstd/dill from requirements and setup.py and imports them lazily; a dependency-packaging change.,second_pass_audit
+pennylane,57a9373079e0a4916b62df6c6ba58da070262a9b,2022-11-23T16:59:00+00:00,"CMP #7: Add `Probability` MP class (#3287)
+
+* Add process abstract method to MeasurementProcess class
+
+* Add TODO comment.
+
+* Add docstring
+
+* Add _Probability class
+
+* Add _Sample class
+
+* Add process method to ClassicalShadow class
+
+* Add tests
+
+* Remove r_dtype from argument
+
+* Fix coverage
+
+* TODO
+
+* TODO
+
+* Fix test
+
+* Fix equal
+
+* Fix test
+
+* Fix equal
+
+* Support python3.7
+
+* Revert
+
+* Skip python@3.7 test
+
+* Improve sample code
+
+* Coverage
+
+* Add process_state method
+
+* Add process_state method
+
+* Add tests
+
+* Improve tests
+
+* Improve tests
+
+* Add static method
+
+* Improve code
+
+* Add process_state method
+
+* Remove abstract
+
+* Coverage
+
+* Improve code
+
+* Add StateMeasurement and SampleMeasurement classes
+
+* Change inheritance
+
+* Change inheritance
+
+* Revert
+
+* Add changelog entry
+
+* Add changelog entry
+
+* Add changelog entry
+
+* Small fix
+
+* Small fix
+
+* Remove dead code
+
+* Coverage
+
+* Clean up tests
+
+* Fix test
+
+* Coverage
+
+* Add changelog entry
+
+* Address comments
+
+* Change state type
+
+* Remove error
+
+* Small fix
+
+* Fix types
+
+* Remove numpy usage
+
+* Fix wire_map
+
+* Add wire_order to process_samples
+
+* Docstring
+
+* Small fix
+
+* Add wire_order to process_samples
+
+* Add wire_order to process_samples
+
+* Change tests
+
+* Add wire_order to process_samples
+
+* Add breaking change message
+
+* Change tests
+
+* Update doc/releases/changelog-dev.md
+
+* Update tests/measurements/test_probs.py
+
+* Remove useless method
+
+* Improve code",v0.28.0,2022-12-19T21:25:17+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff introduces the _Probability measurement class as part of the measurement-process restructuring.,second_pass_audit
+pennylane,fa6948a5ef2e05c0e2bed3a954adf33b5d0ea639,2022-11-30T20:15:54+00:00,"CMP #11.2: Refactor `MeasurementProcess` (#3437)
+
+* Add _Expectation class
+
+* Add changelog entry
+
+* Coverage
+
+* Refactor MeasurementProcess
+
+* Fix tests
+
+* Fix tests
+
+* Use child classes
+
+* More refactors
+
+* Address comments
+
+* Add interface tests
+
+* Change state type
+
+* Change state type
+
+* Add test
+
+* Remove error
+
+* Remove comment
+
+* Add tests
+
+* Add tests
+
+* Some changes
+
+* Small fix
+
+* Fix types
+
+* Fix types
+
+* Remove numpy usage
+
+* Fix types
+
+* Fix types
+
+* Add mark
+
+* Revert
+
+* Remove return_type argument
+
+* Small Fix
+
+* Small Fix
+
+* Fix classical shadow
+
+* Small fix
+
+* Small fix
+
+* Use if self.wires
+
+* Small fix
+
+* Fix wire_map
+
+* Fix wire_map
+
+* Fix wire_map
+
+* Revert
+
+* Revert
+
+* Add classical shadow logic to the MP class
+
+* Small fix
+
+* Fix tests
+
+* Fix tests
+
+* Fix tests
+
+* Fix tests
+
+* Fix tests
+
+* Fix tests
+
+* Fix tests
+
+* Add test
+
+* Add wire_order to process_samples
+
+* Docstring
+
+* Add wire_order to process_samples
+
+* Small fix
+
+* Small fix
+
+* Add wire_order to process_samples
+
+* Add wire_order to process_samples
+
+* Change tests
+
+* Add wire_order to process_samples
+
+* Add breaking change message
+
+* Change tests
+
+* Change tests
+
+* Add wire_order to process_samples
+
+* Change tests
+
+* Fix tests
+
+* Fix tests
+
+* Add wire_order to process_samples
+
+* Change tests
+
+* Coverage
+
+* Coverage
+
+* Fix tests
+
+* Add tests
+
+* Revert
+
+* Add tests
+
+* Add tests
+
+* Remove duplicated test
+
+* Add tests
+
+* Small changes
+
+* Fix tests
+
+* black
+
+* Change name
+
+* Add CustomMeasurement
+
+* Small fix
+
+* Small fix
+
+* Small fix
+
+* test (ClassicalShadow): :test_tube: Test ClassicalShadow.process method
+
+* Add changelog entry
+
+* test (ClassicalShadow): :test_tube: Fix mocker.spy
+
+* revert (ClassicalShadow): :rewind: Remove process_state.
+
+* Revert
+
+* feat: :sparkles: Add _ShadowExpval class.
+
+* Fix tests
+
+* Fix test
+
+* Fix
+
+* Fix docs
+
+* Fix docs
+
+* Fix types
+
+* Fix types
+
+* Fix docstrings
+
+* fix test
+
+* Add changelog entry
+
+* Remove docs
+
+* Remove docs
+
+* Fix docstrings
+
+* Small change
+
+* Remove return_type
+
+* Fix
+
+* Fix
+
+* Fix
+
+* fix
+
+* fix
+
+* fix
+
+* Fix tests
+
+* Remove mocker
+
+* Add tests
+
+* Fix tests
+
+* Coverage
+
+* Update doc/releases/changelog-dev.md
+
+* Revert merge
+
+* Revert tests
+
+* Revert
+
+* Copy hamiltonian
+
+* Use seed
+
+* Change docstrings
+
+* Change instance check.
+
+* Fix
+
+* Fix
+
+* Remove dead code
+
+* Fix tests
+
+* Add deprecation warning
+
+* Fix docstring
+
+* Add changelog entry
+
+* Fix docstring
+
+* Add type
+
+* Remove type
+
+* Change warning type
+
+* Revert
+
+* Add changelog entry
+
+* Refactor MP
+
+* Add changelog entry
+
+* Make return_type None by default
+
+* Coverage
+
+* Update tests/measurements/test_counts.py
+
+* Remove unused imports
+
+* Add import
+
+* Move import
+
+* Update tests/measurements/test_measurements.py
+
+* Move ABC inheritannce
+
+* move ABC
+
+* Move import",v0.28.0,2022-12-19T21:25:17+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff moves numeric_type/samples_computational_basis onto the measurement subclasses; pure restructuring.,second_pass_audit
+pennylane,e9394eadd3d9dc1dcb6ef6057965eb0ce139fcca,2022-12-06T15:15:53+00:00,"Allow devices to specify if they want to disregard grouping (#3456)
+
+* Allow devices to specify if they want to disregard grouping
+
+* Update changelog and fix black and linter
+
+* Add use_grouping to capabilities
+
+* remove use_grouping from default config
+
+* Add a unit test
+
+* Update pennylane/_device.py
+
+Co-authored-by: Christina Lee <chrissie.c.l@gmail.com>
+
+* Fix black
+
+* Update tests/test_device.py
+
+* Fix variable name
+
+Co-authored-by: Christina Lee <chrissie.c.l@gmail.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>",v0.28.0,2022-12-19T21:25:17+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds an opt-in use_grouping device capability; a feature addition.,second_pass_audit
+pennylane,7b986365da132bac883e9474a83d970f7c35c52b,2022-12-14T16:04:42+00:00,"[Return-types #12.3] JAX-JIT interface higher-order derivatives (#3498)
+
+* Structure
+
+* Struct jax interface
+
+* First draft
+
+* Single measurement is working
+
+* First derivative
+
+* tests
+
+* Add tests
+
+* x64 Jax testing
+
+* Cleanup
+
+* more cleanup
+
+* More tests
+
+* More tests
+
+* QNode testing
+
+* More tests pass
+
+* Typos in tests
+
+* Test JVP structure.
+
+* More tests
+
+* More tests
+
+* More tests
+
+* Typoo
+
+* Coverage
+
+* test
+
+* Jax import test
+
+* Typo
+
+* Trigger CI
+
+* Update param shift
+
+* Docstrings
+
+* very first try on a simple func
+
+* is_abstract use
+
+* reenable JAX JIT tests
+
+* wire in jax jit
+
+* intermed changes
+
+* drafting
+
+* draft
+
+* try jax.experimental.host_callback.call again (not working though)
+
+* Revert ""try jax.experimental.host_callback.call again (not working though)""
+
+This reverts commit 1c8f85d3c539e5c0e3efcc3681338a69d45ebd40.
+
+* getting some tests to pass with shortcuts (need more work to polish)
+
+* more
+
+* reset Hermitian file
+
+* update device method expected output
+
+* clean
+
+* post-processing draft
+
+* Device backward mode works
+
+* skip the FWD mode test; fix the shape for device diff_method bwd
+
+* no prints
+
+* move dedicated JIT tests into separate file; allow JIT tests by parametrization
+
+* Remove fwd test skippings
+
+* Revert ""Remove fwd test skippings""
+
+This reverts commit 5bc7220adc68c23166cf8e4c258d3d7f96b60574.
+
+* Move new jitting interface into its own file
+
+* Move new jitting interface into its own file
+
+* update imported func name
+
+* multi-param single scalar out works
+
+* comment
+
+* jacobian shape extracted
+
+* getting the shape right for test_gradient and for first couple of test_jax_new tests
+
+* Refining the shape definitions further; test_gradient still okay
+
+* tests/returntypes/test_jax_new.py passes
+
+* Add in JAX JIT QNode integration tests (no hessians or fwd mode just now)
+
+* Add in TODOs for fwd mode; qml.counts is not implemented for JAX-JIT (TODO to consider because no gradient and callback requires shape and dtype, but qml.counts returns a dict)
+
+* Skip more Hessian tests; skip a fwd mode test case
+
+* formatting
+
+* formatting and linting
+
+* changelog
+
+* more cleaning
+
+* one jac function suffices; more renaming
+
+* parametrize over jax jacobian functions
+
+* revert change in jvp.py; add docstring; revert the jitting kwarg; keep only minimal change in execution.py
+
+* no need to update pennylane/interfaces/jax_jit.py (old return types file)
+
+* remove unused code
+
+* linting
+
+* more testing and validation
+
+* switch to an example with multiple measurements
+
+* Add fwd mode implementation, get basic test_jax_new.py file to pass after allowing the forward mode test cases
+
+* allow more test cases
+
+* docstring
+
+* no squeezing required for post-processing
+
+* comment on qml.counts
+
+* move around funcs
+
+* docstring
+
+* better name for fn
+
+* copy existing unit test file to a new test_jax_jit_new.py file
+
+* JIT-specific tests
+
+* Trim Python specific tests
+
+* module docstrings
+
+* jit the whole fnc
+
+* auxiliary function for a single shape
+
+* linting
+
+* linting improvement suggested
+
+* no need to skip fwd mode test cases
+
+* matrix parameter
+
+* lint
+
+* linting
+
+* re-add unused-variable because of CI
+
+* changelog
+
+* port over more tests
+
+* no jax-jit test cases in test_jax_qnode_new.py
+
+* format
+
+* changelog
+
+* changelog; unlock tests
+
+* have no jax-jit usage in test_jax_qnode_new.py
+
+* first try
+
+* more logic and hessian tests
+
+* draft
+
+* remove old tests/returntypes/test_jax_jit_new.py
+
+* draft
+
+* fix imports from the remnants of the merge; update hessian test case to match the JAX outputs; remove outdated test file
+
+* more
+
+* working on more tests
+
+* update more test cases
+
+* remove max_diff_error test case
+
+* extend condition to select the jacobians from the list
+
+* TODO done
+
+* no need to get first element of all_jacs
+
+* Apply suggestions from code review
+
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>
+
+* Add shots test
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: Edward Jiang <34989448+eddddddy@users.noreply.github.com>",v0.29.0,2023-02-28T14:50:15+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff removes the first-order restriction and implements higher-order JAX-JIT derivatives; a feature addition.,second_pass_audit
+pennylane,eb605de0aafc8a0a06160662f703c6487d0987c0,2023-01-27T17:03:04+00:00,"Deprecate `collections` module (#3686)
+
+* :art: style (collections): Deprecate module.
+
+* :pencil2: chore (changelog): Add changelog entry.
+
+* :art: style (collections): codefactor.
+
+* :wrench: refactor (dot): Replace qml.ops.dot by qml.dot.
+
+* :memo: docs (dot): Fix example.
+
+* :wrench: refactor (collections): Update deprecation warnings.
+
+* :memo: docs (dot): Fix sphinx.
+
+* :test_tube: tests (dot): Fix path.
+
+* :test_tube: tests (dot): Fix path.
+
+* :memo: docs (dot): Fix path.
+
+* :test_tube: tests (dot): Fix path.
+
+* :art: style (dot): Redirect to qml.collections.dot if input is QNodeCollection.
+
+* :test_tube: tests (dot): Test warning.
+
+* :test_tube: tests (collections): Fix tests.
+
+* :pencil2: chore (changelog): Add changelog entry.
+
+* :rewind: revert (dot): Revert changes.
+
+* :art: style (dot): Use qml.
+
+* :pencil2: chore (changelog): Stop using qml.ops.dot in changelog.
+
+* :rewind: revert (init): Revert changes.
+
+* :wrench: refactor (sum): Change qml.op_sum to qml.sum.
+
+* :pencil2: chore (changelog): Add changelog entry.
+
+* :test_tube: tests (sum): Fix.
+
+* :memo: docs (sum): Add to deprecations page.
+
+* :memo: docs (sum): Update docstring.
+
+* Update doc/releases/changelog-dev.md
+
+* Update doc/development/deprecations.rst
+
+Co-authored-by: Mudit Pandey <muditpandey2812@gmail.com>
+
+* :art: style (dot): Change warning message.
+
+* Update pennylane/pulse/parametrized_evolution.py
+
+Co-authored-by: Mudit Pandey <muditpandey2812@gmail.com>
+
+* Update pennylane/pulse/parametrized_evolution.py
+
+---------
+
+Co-authored-by: Mudit Pandey <muditpandey2812@gmail.com>",v0.29.0,2023-02-28T14:50:15+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff adds deprecation warnings across the collections module and re-points qml.dot/qml.sum.,second_pass_audit
+pennylane,026d6d4f2a708809c1a882f55c6c1777b91892c0,2023-02-02T16:25:05+00:00,"Docfix/architecture typo (#3707)
+
+* Fix small typo in architecture.rst.
+
+* Fix typo in doc/development/guide/tests.rst.
+
+---------
+
+Co-authored-by: Vincent Michaud-Rioux <vincent.michaud-rioux@xanadu.ai>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>",v0.29.0,2023-02-28T14:50:15+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only corrects typos in two development guide .rst files.,second_pass_audit
+pennylane,ed5973519192cf24a92d417a343ed98b0af4a6b6,2023-02-15T21:06:27+00:00,"[bugfix] QNodes can no longer return empty iterables (#3769)
+
+* do not return empty list from qfunc_transform
+
+* fail qnode if empty list returned
+
+* fix docstring that now fails; add test for empty return
+
+* changelog entry
+
+* trigger ci
+
+* add utest for qfunc_transform return value modification",v0.29.0,2023-02-28T14:50:15+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff adds the 'not measurement_processes' guard (all() was vacuously true on an empty list) and returns None from qfunc_transform for zero measurements.,second_pass_audit
+pennylane,18f4f0726c1ae79ed426ee44cfd797df4b6230f0,2023-02-15T22:27:54+00:00,"Add `argnum` argument to `metric_tensor` (#3587)
+
+* First step. Handling entire blocks that are not in argnum in the block diagonal case.
+
+* argnum selection works now for the _metric_tensor_cov_matrix function, i.e. for block-diag approximation.
+
+* argnum kwarg now working for _metric_tensor_hadamard as well. TODO still: doc strings.
+
+* Added argnum to doc strings.
+
+* Clean up
+
+* Added test for argnum argnument.
+
+* black formatting
+
+* Add Changelog entry
+
+* Fixed typos.
+
+* Add PR link.
+
+* Some pylint fixes.
+
+* Revert argument indentation, as this doesn't fix the pylint errors too-many-arguments and too-many-statements and additionally results in an error when running black.
+
+* No need to restrict to lists.
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* No need to restrict to lists.
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* Updated doc string of `metric_tensor`.
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* Update pennylane/transforms/metric_tensor.py
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* Updated doc string of `metric_tensor`.
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+
+* Restructuring
+
+* Added tests for the UserWarning, integer argument, and zero components of the metric tensor.
+
+* Added tests for all four interfaces.
+
+* Raise ValueError instead of warning when argnum is ill specified.
+
+* Update tests/transforms/test_metric_tensor.py
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* Change to only working with inner lists in _metric_tensor_cov_matrix.
+
+* Change all tests to only check against zero.
+
+* Update doc/releases/changelog-dev.md
+
+* Update pennylane/transforms/metric_tensor.py
+
+* Pylint disable
+
+* Doc
+
+* Update doc/releases/changelog-dev.md
+
+* Warning in docstring about usage of argnum.
+
+* Fix sphinx error.
+
+---------
+
+Co-authored-by: David Wierichs <davidwierichs@gmail.com>
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>",v0.29.0,2023-02-28T14:50:15+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds the argnum keyword to metric_tensor; a feature addition.,second_pass_audit
+pennylane,1a795a0164fe21438e451aae3f92adf7fe5523aa,2023-02-27T17:10:41+00:00,"Daily rc sync to master $(date +'%Y-%m-%d') (#3831)
+
+* Undeprecate `ApproxTimeEvolution` (#3797)
+
+* readd ApproxTimeEvolution
+
+* More
+
+* Full deprecation
+
+* Fix (#3801)
+
+* Register `SpecialUnitary` operation with `DefaultMixed` and `NullQubit` (#3651)
+
+* Add SpecialUnitary, its utilities and tests
+
+* changelog
+
+* whitespace
+
+* docstrings
+
+* empty
+
+* device test
+
+* black
+
+* linting and test coverage
+
+* registered in default qubit and added tests
+
+* registered in default mixed and added tests
+
+* black
+
+* changelog
+
+* register with null qubit, add test, lint null qubit test as bonus
+
+* black
+
+* update docstring
+
+* revert some changes/continued merge
+
+* remove old namespace dependencies
+
+* black
+
+* lint
+
+* docstring typo
+
+* lint
+
+* remove inverse testing
+
+* change reference
+
+* revert addition
+
+* add ParametrizedEvolution to mixed device (#3794)
+
+* add ParametrizedEvolution to mixed device
+
+* black test
+
+* make test more broad
+
+* black tests
+
+* Update tests/pulse/test_parametrized_evolution.py
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* sparse implementation
+
+* Revert ""Merge branch 'evolvemixed' of https://github.com/PennyLaneAI/pennylane into evolvemixed""
+
+This reverts commit e653b503fe494e7afc2403b1bedca3be1bffc674, reversing
+changes made to bb2d3d6f099ced8e1847132a618d31ec8837e707.
+
+* Revert ""sparse implementation""
+
+This reverts commit bb2d3d6f099ced8e1847132a618d31ec8837e707.
+
+* review comment
+
+* trigger ci
+
+---------
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* little touchups while reviewing changes in 0.29 (#3809)
+
+* Update pulse module documentation examples (#3805)
+
+* init
+
+* spacing
+
+* windows parsing in rect()
+
+* revert jnp.array parameters, doc typo
+
+* test docstring, remove interface warning
+
+* doc fix?
+
+* lint
+
+---------
+
+Co-authored-by: lillian542 <38584660+lillian542@users.noreply.github.com>
+
+* Raise error when using `qml.probs` in the computational basis with non-commuting observables (#3811)
+
+* :bug: fix (MeasurementProcess): Change if a measurement is using the computational basis.
+
+* :art: style (MeasurementProcess): Remove useless properties.
+
+* :test_tube: tests (qscript): Fix tests.
+
+* :test_tube: tests (measurements): Fix tests.
+
+* :test_tube: tests (return_types): Fix tests.
+
+* :test_tube: tests (tape): Fix tests.
+
+* :test_tube: tests (circuit_graph): Fix tests.
+
+* :test_tube: tests (return_types): Fix tests.
+
+* :test_tube: tests (return_types): Fix tests.
+
+* :pencil2: chore (changelog): Add changelog entry.
+
+* :wrench: refactor (MeasurementProcess): Change method name.
+
+* :wrench: refactor (MeasurementProcess): Change method name.
+
+* :wrench: refactor (MeasurementProcess): Change method name.
+
+* Update pennylane/tape/qscript.py
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+---------
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* docs: consistent naming of tape instance in docstr (#3795)
+
+as title states. nothing fancy here
+
+* Documentation fixes (#3808)
+
+* fix some type hints
+
+* minor docstring fixes
+
+* minor docstring changes
+
+* fix rendering issue
+
+* Update pennylane/pulse/parametrized_hamiltonian.py
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* Fix docs of new features (#3818)
+
+* :pencil2: chore (changelog): Fix changelog entry.
+
+* :memo: docs (BasisRotation): Fix docstrings.
+
+* :memo: docs (xyx_decompositions): Fix docstring.
+
+* :memo: docs (metric_tensor): Fix docstring.
+
+* Minor fixes for v0.29 release (#3815)
+
+* Added fixes for auto documentation
+
+* Added minor doc changes for hadamard gradient
+
+* Added fix for queuing diagonalizing gates
+
+* Small fix to IsingZZ doc
+
+* Fixed doc for max_entropy
+
+---------
+
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+
+* Copy one-electron integrals inside `_chemist_transform` (#3816)
+
+* fix inplace one-int issue in `_chemist_transform`
+
+* add test to assert no inplace manipulation happens
+
+* happy black
+
+* Fix equal for measurements with observables, measurement process repr, Hermitian casting fix (#3820)
+
+* equal with measurement processes
+
+* not change math.asarray for autograd
+
+* not change math.asarray for autograd
+
+* Update doc/releases/changelog-0.29.0.md
+
+* add coverage for measurements of observables that are equal but have different wire orders
+
+* break up docstrings, test hermitian case
+
+* Update exp.py
+
+fixing docs typo in RC branch
+
+* Docstring fixes for unchanged functions (#3824)
+
+* Added docstring fixes for old functions
+
+* Updated more docs
+
+* Changing functions
+
+* Fixed more docstrings
+
+* Added changes to more function docs
+
+* Fix to build sphinx
+
+* Addressing PR comments
+
+* fix docker link; remove old inv comment (#3823)
+
+* Device api doc typo fixes (#3819)
+
+* tiny doc edits
+
+* Update pennylane/devices/experimental/device_api.py
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* seealso
+
+* Update pennylane/devices/experimental/device_api.py
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* un-deprecate make_tape (#3807)
+
+* Update changelog (#3719)
+
+* Update changelog-dev.md
+
+* Remove
+
+* Move pulse
+
+* Update title
+
+* pulse edits
+
+* minor
+
+* Absorb new additions
+
+* Reorder improvements
+
+* Add new section
+
+* Add commas to contributors section
+
+* Remove order requirement
+
+* Rearrange
+
+* Simplify pulse section
+
+* Improve
+
+* Improve
+
+* Improve
+
+* Improve
+
+* Add additional section
+
+* Update doc/releases/changelog-dev.md
+
+* brackets around PR numbers
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Apply suggestions from code review
+
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+
+* Apply suggestions from code review
+
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+
+* Add suggestions
+
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+
+* Update doc/releases/changelog-dev.md
+
+* qml.
+
+* removed TODO markers
+
+* deps and breaking changes
+
+* deps and breaking changes
+
+* Move addtion
+
+* Apply suggestions from code review
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Apply suggestions from code review
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Add for Evolve
+
+* Add
+
+* Apply suggestions from code review
+
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+
+* Fix code
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* Tom
+
+* Add entry
+
+* Update name
+
+* Update
+
+* Rearrange for auto
+
+* Typo
+
+* Remove ApproxTimeEvolution deprecation
+
+* Typo
+
+* minor
+
+* minor
+
+* Fix warning
+
+* Maybe fix warning
+
+* Add a few entries
+
+* Add breaking change
+
+* Maybe fix error
+
+* Maybe fix warning
+
+* minor
+
+* minor
+
+* add details to changelog for marginal_prob bug (#3821)
+
+* Add subsection
+
+* Update
+
+* Update
+
+* Add
+
+---------
+
+Co-authored-by: Isaac De Vlugt <isaacdevlugt@gmail.com>
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* exclude files from pr
+
+---------
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: lillian542 <38584660+lillian542@users.noreply.github.com>
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+Co-authored-by: Utkarsh <utkarshazad98@gmail.com>
+Co-authored-by: Nathan Killoran <co9olguy@users.noreply.github.com>
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+Co-authored-by: Isaac De Vlugt <isaacdevlugt@gmail.com>
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+Co-authored-by: GitHub Actions Bot <>",v0.30.0,2023-05-01T18:37:48+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Release-candidate sync bundling many PRs across 46 files; production edits visible are docstring/reference corrections.,second_pass_audit
+pennylane,941f41573ff1c86b9cc786485b700e7000a728a6,2023-03-02T14:40:02+00:00,"Daily rc sync to master $(date +'%Y-%m-%d') (#3845)
+
+* Undeprecate `ApproxTimeEvolution` (#3797)
+
+* readd ApproxTimeEvolution
+
+* More
+
+* Full deprecation
+
+* Fix (#3801)
+
+* Register `SpecialUnitary` operation with `DefaultMixed` and `NullQubit` (#3651)
+
+* Add SpecialUnitary, its utilities and tests
+
+* changelog
+
+* whitespace
+
+* docstrings
+
+* empty
+
+* device test
+
+* black
+
+* linting and test coverage
+
+* registered in default qubit and added tests
+
+* registered in default mixed and added tests
+
+* black
+
+* changelog
+
+* register with null qubit, add test, lint null qubit test as bonus
+
+* black
+
+* update docstring
+
+* revert some changes/continued merge
+
+* remove old namespace dependencies
+
+* black
+
+* lint
+
+* docstring typo
+
+* lint
+
+* remove inverse testing
+
+* change reference
+
+* revert addition
+
+* add ParametrizedEvolution to mixed device (#3794)
+
+* add ParametrizedEvolution to mixed device
+
+* black test
+
+* make test more broad
+
+* black tests
+
+* Update tests/pulse/test_parametrized_evolution.py
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* sparse implementation
+
+* Revert ""Merge branch 'evolvemixed' of https://github.com/PennyLaneAI/pennylane into evolvemixed""
+
+This reverts commit e653b503fe494e7afc2403b1bedca3be1bffc674, reversing
+changes made to bb2d3d6f099ced8e1847132a618d31ec8837e707.
+
+* Revert ""sparse implementation""
+
+This reverts commit bb2d3d6f099ced8e1847132a618d31ec8837e707.
+
+* review comment
+
+* trigger ci
+
+---------
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* little touchups while reviewing changes in 0.29 (#3809)
+
+* Update pulse module documentation examples (#3805)
+
+* init
+
+* spacing
+
+* windows parsing in rect()
+
+* revert jnp.array parameters, doc typo
+
+* test docstring, remove interface warning
+
+* doc fix?
+
+* lint
+
+---------
+
+Co-authored-by: lillian542 <38584660+lillian542@users.noreply.github.com>
+
+* Raise error when using `qml.probs` in the computational basis with non-commuting observables (#3811)
+
+* :bug: fix (MeasurementProcess): Change if a measurement is using the computational basis.
+
+* :art: style (MeasurementProcess): Remove useless properties.
+
+* :test_tube: tests (qscript): Fix tests.
+
+* :test_tube: tests (measurements): Fix tests.
+
+* :test_tube: tests (return_types): Fix tests.
+
+* :test_tube: tests (tape): Fix tests.
+
+* :test_tube: tests (circuit_graph): Fix tests.
+
+* :test_tube: tests (return_types): Fix tests.
+
+* :test_tube: tests (return_types): Fix tests.
+
+* :pencil2: chore (changelog): Add changelog entry.
+
+* :wrench: refactor (MeasurementProcess): Change method name.
+
+* :wrench: refactor (MeasurementProcess): Change method name.
+
+* :wrench: refactor (MeasurementProcess): Change method name.
+
+* Update pennylane/tape/qscript.py
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+---------
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* docs: consistent naming of tape instance in docstr (#3795)
+
+as title states. nothing fancy here
+
+* Documentation fixes (#3808)
+
+* fix some type hints
+
+* minor docstring fixes
+
+* minor docstring changes
+
+* fix rendering issue
+
+* Update pennylane/pulse/parametrized_hamiltonian.py
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* Fix docs of new features (#3818)
+
+* :pencil2: chore (changelog): Fix changelog entry.
+
+* :memo: docs (BasisRotation): Fix docstrings.
+
+* :memo: docs (xyx_decompositions): Fix docstring.
+
+* :memo: docs (metric_tensor): Fix docstring.
+
+* Minor fixes for v0.29 release (#3815)
+
+* Added fixes for auto documentation
+
+* Added minor doc changes for hadamard gradient
+
+* Added fix for queuing diagonalizing gates
+
+* Small fix to IsingZZ doc
+
+* Fixed doc for max_entropy
+
+---------
+
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+
+* Copy one-electron integrals inside `_chemist_transform` (#3816)
+
+* fix inplace one-int issue in `_chemist_transform`
+
+* add test to assert no inplace manipulation happens
+
+* happy black
+
+* Fix equal for measurements with observables, measurement process repr, Hermitian casting fix (#3820)
+
+* equal with measurement processes
+
+* not change math.asarray for autograd
+
+* not change math.asarray for autograd
+
+* Update doc/releases/changelog-0.29.0.md
+
+* add coverage for measurements of observables that are equal but have different wire orders
+
+* break up docstrings, test hermitian case
+
+* Update exp.py
+
+fixing docs typo in RC branch
+
+* Docstring fixes for unchanged functions (#3824)
+
+* Added docstring fixes for old functions
+
+* Updated more docs
+
+* Changing functions
+
+* Fixed more docstrings
+
+* Added changes to more function docs
+
+* Fix to build sphinx
+
+* Addressing PR comments
+
+* fix docker link; remove old inv comment (#3823)
+
+* Device api doc typo fixes (#3819)
+
+* tiny doc edits
+
+* Update pennylane/devices/experimental/device_api.py
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* seealso
+
+* Update pennylane/devices/experimental/device_api.py
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* un-deprecate make_tape (#3807)
+
+* Update changelog (#3719)
+
+* Update changelog-dev.md
+
+* Remove
+
+* Move pulse
+
+* Update title
+
+* pulse edits
+
+* minor
+
+* Absorb new additions
+
+* Reorder improvements
+
+* Add new section
+
+* Add commas to contributors section
+
+* Remove order requirement
+
+* Rearrange
+
+* Simplify pulse section
+
+* Improve
+
+* Improve
+
+* Improve
+
+* Improve
+
+* Add additional section
+
+* Update doc/releases/changelog-dev.md
+
+* brackets around PR numbers
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Apply suggestions from code review
+
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+
+* Apply suggestions from code review
+
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+
+* Add suggestions
+
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+
+* Update doc/releases/changelog-dev.md
+
+* qml.
+
+* removed TODO markers
+
+* deps and breaking changes
+
+* deps and breaking changes
+
+* Move addtion
+
+* Apply suggestions from code review
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Apply suggestions from code review
+
+* Update
+
+* Update
+
+* Update
+
+* Update
+
+* Add for Evolve
+
+* Add
+
+* Apply suggestions from code review
+
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+
+* Fix code
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* minor
+
+* Tom
+
+* Add entry
+
+* Update name
+
+* Update
+
+* Rearrange for auto
+
+* Typo
+
+* Remove ApproxTimeEvolution deprecation
+
+* Typo
+
+* minor
+
+* minor
+
+* Fix warning
+
+* Maybe fix warning
+
+* Add a few entries
+
+* Add breaking change
+
+* Maybe fix error
+
+* Maybe fix warning
+
+* minor
+
+* minor
+
+* add details to changelog for marginal_prob bug (#3821)
+
+* Add subsection
+
+* Update
+
+* Update
+
+* Add
+
+---------
+
+Co-authored-by: Isaac De Vlugt <isaacdevlugt@gmail.com>
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* Fix sign expand (#3814)
+
+* Tape queue to script
+
+* Fix doc
+
+* QNode example
+
+* Apply suggestions from code review
+
+* Apply suggestions from code review
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* use new pauli module
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+
+* Fix (#3828)
+
+* Remove warning. (#3829)
+
+* Update deprecations page (#3830)
+
+* Update grouping
+
+* Update seed recipes
+
+* Update QubitDevice.statistics
+
+* Raise error if JAX or jaxlib are 0.4.4 (#3813)
+
+* Raise error for 0.4.4 jaxlib and jax
+
+* add tests
+
+* black for tests
+
+* add jax mark for test
+
+* Remove jaxlib check
+
+Co-authored-by: Filippo Vicentini <filippovicentini@gmail.com>
+
+* More detailed error msg
+
+Co-authored-by: Filippo Vicentini <filippovicentini@gmail.com>
+
+* Update tests
+
+* Tests and black
+
+* Typo
+
+* Change
+
+---------
+
+Co-authored-by: Filippo Vicentini <filippovicentini@gmail.com>
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+
+* 0.29 changelog updates (#3835)
+
+* Update codeblock type
+
+* Update example
+
+* Wording
+
+* Add CTA
+
+* Update wire number
+
+* Remove wire
+
+* Update wording
+
+* Add
+
+* Fix imports
+
+* Add deprecation
+
+* Remove tilde
+
+* Merge data and other improvements
+
+* Typo
+
+* Typo
+
+* Typo
+
+* Emojis
+
+* Remove whitespace
+
+* remove duplicate entries
+
+* Apply suggestions from code review
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* Docfix/circuits note gpu (#3836)
+
+* Fix note on lightning.gpu plugin in intro/circuits.
+
+* Update doc/releases/changelog-0.29.0.md.
+
+---------
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* Promote warning about vanilla version of NumPy to RST warning. (#3838)
+
+* Promote warning about vanilla version of NumPy from bold format to RST warning. Make Autograd case uniform.
+
+* Update changlog.
+
+* fix strings that wrap around without a space (#3837)
+
+* fix strings that wrap around without a space
+
+* missed one
+
+* always use trailing whitespace instead of leading
+
+---------
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* Use default.qubit.jax instead of default.qubit (#3839)
+
+* Use default.qubit.jax instead of default.qubit
+
+* Apply suggestions from code review
+
+Taking the liberty to commit these changes here due to time sensitivity
+
+* Revert ""Apply suggestions from code review
+""
+
+This reverts commit d457ffb9820c3f1bbdf10a0ed0ccff957e2665ad.
+
+---------
+
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Korbinian Kottmann <Korbinian.Kottmann@gmail.com>
+
+* Update header images (#3827)
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* exclude files from pr
+
+---------
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: lillian542 <38584660+lillian542@users.noreply.github.com>
+Co-authored-by: Albert Mitjans <a.mitjanscoma@gmail.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+Co-authored-by: Utkarsh <utkarshazad98@gmail.com>
+Co-authored-by: Nathan Killoran <co9olguy@users.noreply.github.com>
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+Co-authored-by: Isaac De Vlugt <isaacdevlugt@gmail.com>
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+Co-authored-by: Filippo Vicentini <filippovicentini@gmail.com>
+Co-authored-by: Vincent Michaud-Rioux <vincentm@nanoacademic.com>
+Co-authored-by: Korbinian Kottmann <Korbinian.Kottmann@gmail.com>
+Co-authored-by: GitHub Actions Bot <>",v0.30.0,2023-05-01T18:37:48+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Second rc sync of the same batch; production edits only switch docstring examples to default.qubit.jax and update header images.,second_pass_audit
+pennylane,5c87d88dfb36e8a173c97378e01ed6f40960d317,2023-03-07T21:27:34+00:00,"Make `qml.OrbitalRotation` consistent with interleaved JW ordering (#3861)
+
+* modify decomposition
+
+* fix `expected_grad_fn`
+
+* replace figure and update docstring
+
+* add changelog
+
+* improvements to docs
+
+* happy codefactor
+
+* add review suggestions
+
+* fix tapering tests for `qml.OrbitalRotation`
+
+* fix tests for `qml.GateFabric`
+
+* update `GateFabric` usage details
+
+* add a breaking-change entry
+
+* changelog",v0.30.0,2023-05-01T18:37:48+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff inserts the missing PauliZ strings in the OrbitalRotation generator and updates the decomposition/mask, changing the gate matrix to match interleaved Jordan-Wigner ordering.",second_pass_audit
+pennylane,ac8b1ed19bb330263e7d8c92ccc5c23abf172d9e,2023-03-21T16:11:26+00:00,"ParametrizedHamiltonian addition bugfix (#3902)
+
+* bug fix
+
+* Add test to confirm behaviour
+
+* Update changelog
+
+* Apply suggestions from code review
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+
+* update change-log
+
+* Add tests
+
+* Fix black formatting
+
+* Change tolerance of failing qchem test
+
+* Change tolerance of failing qchem test but correctly
+
+* Change tolerance of failing qchem test but actually correctly
+
+* Put tests back
+
+---------
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>",v0.30.0,2023-05-01T18:37:48+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,Diff wraps H.coeffs in list() in ParametrizedHamiltonian.__add__/__radd__; concatenating a list with an ndarray previously produced element-wise addition and silently wrong coefficients.,second_pass_audit
+pennylane,b7d658b089c8693ffa5a774994ef6db788e2dd88,2023-04-11T15:52:00+00:00,"give some tests their own suites for parallelization (#3964)
+
+* give some tests their own suites for parallelization
+
+* update jax par-ham test
+
+* copy jax device operations list before adding to it
+
+* pylint tests after return update
+
+* condense test configs using matrix
+
+* try an even more condensed format
+
+* one-index. eyeroll.
+
+* trigger ci
+
+* remove unwanted continue from tests.yml
+
+* changelog
+
+* mark flaky test
+
+* fix bad merge
+
+* trigger ci
+
+* give each interface their own test job
+
+* fix duplicate artifact names
+
+* try only 2 groups
+
+* define default.qubit.jax ops at class level
+
+---------
+
+Co-authored-by: Romain Moyard <rmoyard@gmail.com>",v0.30.0,2023-05-01T18:37:48+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,Diff splits test suites across CI jobs; the single production line copies the device operations set instead of mutating the shared class attribute.,second_pass_audit
+pennylane,06573a9c396cc4cc5518888a294e92fa817abdb8,2023-04-28T15:14:14+00:00,"Daily rc sync to master (#4051)
+
+* Add a `ResourcesOperation` class to support resource estimation of custom operations (#4026)
+
+* transfer changes
+
+* add changelog, fix typos
+
+* Update pennylane/resource/resource.py
+
+Co-authored-by: Diego <67476785+DSGuala@users.noreply.github.com>
+
+* Update pennylane/resource/resource.py
+
+* allow depth=None
+
+* update changelog to use qml.spec
+
+* lint
+
+* lint
+
+* fix test
+
+* Apply suggestions from code review
+
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* add wires
+
+* ci?
+
+---------
+
+Co-authored-by: Diego <67476785+DSGuala@users.noreply.github.com>
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+
+* Update quickstart documentation (#4032)
+
+* update quickstart docs
+
+* specs fix
+
+* Apply suggestions from code review
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* typos
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* Fix tensors multiplying Hamiltonians (#4036)
+
+* fix tensor and hamltonian multiplication
+
+* Update doc/releases/changelog-0.30.0.md
+
+* Update tests/ops/qubit/test_hamiltonian.py
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+
+---------
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+
+* Clarify `(Diagonal)QubitUnitary` docstrings regarding trainability (#4031)
+
+* change docstring header line for QubitUnitary and DiagonalQubitUnitary.
+
+* changelog. comment
+
+* fix error message when RydbergSettings are not equal (#4042)
+
+* Change `rydberg_drive` convention and default `interaction_coeff` in `rydberg_interaction` (#4040)
+
+* change default interaction in rydberg_interaction. change rydberg drive convention
+
+* adapt tests to changes
+
+* changelog
+
+* include global phase
+
+* doc
+
+* lint tests
+
+* revert default value change
+
+* Add information to errors due to `qml.jacobian` (#3997)
+
+* more informative error in jacobian
+
+* Update doc/releases/changelog-dev.md
+
+* merge conflict fix
+
+* change error message
+
+* restrict to just type errors
+
+* add test file to tests_passing_pylint
+
+* only add to error if return types enabled
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* exclude files from pr
+
+---------
+
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>
+Co-authored-by: Diego <67476785+DSGuala@users.noreply.github.com>
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+Co-authored-by: GitHub Actions Bot <>",v0.31.0,2023-06-26T18:04:21+00:00,1,1,1,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,"Release-candidate sync bundling several PRs (ResourcesOperation, rydberg pulse work, grad error messaging).",second_pass_audit
+pennylane,5fa00cbf342c77bc357fbb29fcdbfabbd1b0953c,2023-05-05T21:50:16+00:00,"Add hash and equality support to `Shots` (#4082)
+
+* Shots repr and str
+
+* Added hash and eq support
+
+* changelog
+
+* changelog
+
+* Add repr and str for ShotCopies
+
+* fix hash
+
+* lint
+
+* lint
+
+* shot_vect --> vector
+
+* fix str rep, and docs
+
+* Fixed tests
+
+* fix test
+
+* add tests
+
+* Update doc/releases/changelog-dev.md
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+
+* ci
+
+---------
+
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>",v0.31.0,2023-06-26T18:04:21+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds __eq__/__hash__ to Shots; a feature addition.,second_pass_audit
+pennylane,1b6706bb203f02f4fb4607093b0c6bddff5cd026,2023-05-08T09:32:02+00:00,"Bug fix that `ParametrizedEvolution.dense` is used in the evolution method in `default.qubit.jax` (#4095)
+
+* mark test with jax
+
+* bug fix
+
+* update changelog
+
+* merge
+
+* trigger CI",v0.31.0,2023-06-26T18:04:21+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff uses operation.dense instead of the hardcoded len(wires)<3 heuristic, so default.qubit.jax stops ignoring the user-specified dense setting of ParametrizedEvolution.",second_pass_audit
+pennylane,f6beb72aa5107600c5273e407f067aeaa47bf769,2023-05-18T20:32:19+00:00,"Fix typo in Controlled docstring (#4135)
+
+Remove an outdated remark in the docstring of Controlled.",v0.31.0,2023-06-26T18:04:21+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only removes an outdated remark from the Controlled docstring.,second_pass_audit
+pennylane,5a9fd249b717dae80ec7f48dd2efe57deee38188,2023-05-30T18:01:27+00:00,"Deprecate do_queue kwarg in Operator (#4148)
+
+* Set do_queue=None by default and warn if it's not None.
+
+* Test that the warning is given.
+
+* Replace do_queue=True with qo_queue=None in children of Operator.
+
+* Fix bug in QuantumTape.
+
+* Remove duplicate warnings.
+
+* Add tests for warning branches.
+
+* Formatting
+
+* Update changelog, deprecations file, and adding_operators guide.
+
+* Update docstrings.
+
+* Remove unused do_queue arguments in tests.
+
+* Remove unnecessary do_queue=False in test.
+
+* Move composite test to test_composite.
+
+* Remove use of do_queue=False in qsvt.py
+
+* Update doc/releases/changelog-dev.md
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+
+* Fix formatting in docstrings.
+
+* Apply suggestions from code review
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* Make changelog and deprecations entries more precise.
+
+* Add missing args in docstrings.
+
+* Update pennylane/templates/subroutines/hilbert_schmidt.py
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* Update pennylane/templates/subroutines/hilbert_schmidt.py
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* Remove unnecessary do_queue=None argument.
+
+* Update tests.
+
+* Update docstrings
+
+* Update tests.
+
+* Formatting.
+
+* Apply suggestions from code review
+
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>
+
+* Fix typos.
+
+* Update new changes on master.
+
+* Fix docs.
+
+* Test previously uncovered lines.
+
+---------
+
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>",v0.31.0,2023-06-26T18:04:21+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff deprecates the do_queue kwarg across 78 production files.,second_pass_audit
+pennylane,6849ff7ed32c843931521d303251580c6f161e91,2023-06-02T09:47:10+00:00,"feat: Updated repr for ParametrizedHamiltonian (#4176)
+
+* feat: Updated repr for ParametrizedHamiltonian
+
+* feat: code reformatted
+
+* feat: Updated with Qottmann' adviced changes, updated test
+
+* feat: reformat test file
+
+* feat: fix to docstrings and improved coverage
+
+* reformat test file
+
+* Updatedtests and docstring
+
+* fixed pylint issue
+
+* repr override
+
+* Updated docstrings
+
+---------
+
+Co-authored-by: lillian542 <38584660+lillian542@users.noreply.github.com>
+Co-authored-by: Korbinian Kottmann <43949391+Qottmann@users.noreply.github.com>",v0.31.0,2023-06-26T18:04:21+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff gives ParametrizedHamiltonian/HardwareHamiltonian a richer __repr__; a presentation feature.,second_pass_audit
+pennylane,da79370db01834671bcd4d1edce408131f920ab2,2023-10-04T17:18:29+00:00,"Fix transforms docs (#4645)
+
+**Description of the Change:**
+
+Transform dispatcher inherits docs from the transform.",v0.33.0,2023-10-30T20:10:13+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff copies transform.__doc__ onto the dispatcher so docs render; documentation plumbing only.,second_pass_audit
+pennylane,5f246a9668d9630f16fa2b351f03749529278ba2,2023-10-19T20:59:32+00:00,"Small fix for transform program and previous device API + typo (#4696)
+
+**Description of the Change:**
+
+Successive QNode call with the previous device API would generate too
+many expand functions. For the previous device the program is
+initialized.",v0.33.0,2023-10-30T20:10:13+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff wraps self.transform_program in a fresh TransformProgram, stopping successive QNode calls from accumulating expand functions in shared state.",second_pass_audit
+pennylane,5cc309bd0b5d12419b50955cb7b4066a5ebe5a19,2023-10-20T13:44:28+00:00,"bump jax version (#4699)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [ ] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [ ] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [ ] Ensure that the test suite passes, by running `make test`.
+
+- [ ] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [ ] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:**
+
+**Description of the Change:**
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**",v0.33.0,2023-10-30T20:10:13+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,ci_only,Diff only bumps the jax version in the interface-unit-tests workflow.,second_pass_audit
+pennylane,89c27592b2c88d02e4d5cde7745cecf23ed30935,2023-10-20T14:25:03+00:00,"Fix logging trace statement with empty gradient_fn (#4669)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [x] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [x] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [x] Ensure that the test suite passes, by running `make test`.
+
+- [x] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [x] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:** The logging implementation for the TRACE level assumes the
+existence of several functions to report their source when enabled. If
+the gradient_fn is None, the logger attempts to retrieve the source and
+fails.
+
+**Description of the Change:** This adds an existence check for all
+execute-enabled TRACE level log statements, and reports only if the
+associated functions exist.
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+
+---------
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>",v0.33.0,2023-10-30T20:10:13+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff swaps callable() for inspect.isfunction() in the TRACE log guards, preventing the __name__ lookup from raising on non-function execute_fn/gradient_fn.",second_pass_audit
+pennylane,b24d6a6da45e2e8339dcb09654ec496ec9f377fc,2023-10-23T18:50:35+00:00,"Recreate CtrlSequence PR (#4707)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [ ] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [ ] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [ ] Ensure that the test suite passes, by running `make test`.
+
+- [ ] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [ ] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:** Recreate the CtrlSequence PR.
+
+**Description of the Change:**
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+
+Co-authored-by: lillian542 <Lillian.frederiksen@xanadu.ai>
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>",v0.33.0,2023-10-30T20:10:13+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds the ControlledSequence template and turns Operator.basis into a property; a feature addition.,second_pass_audit
+pennylane,cf3e5f66e6e85d022c5e40f788d5f429a1d6ebae,2023-12-01T13:16:50+00:00,"Fix two indents in release notes which screw up formatting (#3599)
+
+**Context:**
+
+The release notes are usually not corrected/updated, but in this case
+the typos make the formatting look strange.
+
+**Description of the Change:**
+
+Fixed two indents. While at it, deleted a duplicate entry.
+
+**Benefits:**
+
+Very minor, just for overall neatness.
+
+Co-authored-by: Josh Izaac <josh146@gmail.com>
+Co-authored-by: Tom Bromley <49409390+trbromley@users.noreply.github.com>",v0.34.0,2024-01-08T19:49:47+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only fixes indentation in two released changelog files.,second_pass_audit
+pennylane,a5c5ab90cf581602fa372fb43128528896ec217e,2023-12-15T20:43:53+00:00,"`SymbolicOp`s are queued correctly with `qml.cond` (#4948)
+
+**Context:**
+Any function that is conditioned with `qml.cond` and takes operators as
+arguments was being queued incorrectly. This is especially problematic
+for op_math functions, which generally allow operators as input, not
+just callables.
+
+**Description of the Change:**
+Added check to remove any operators from the queue that are present in
+the arguments to the conditioned function.
+
+I initially thought about also checking for lists of operators, but that
+seems like a rabbit hole (why not also check for lists of lists of lists
+... of operators). I also don't want to encourage users to create their
+own qfuncs that accept operators. This bug only exists because we have
+pennylane functions that accept operators, but creating qfuncs that
+accept operators will cause problems with queuing even outside
+`qml.cond` and should be avoided.
+
+**Benefits:**
+`op_math` functions work correctly with `qml.cond`.
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+#4822
+
+---------
+
+Co-authored-by: lillian542 <38584660+lillian542@users.noreply.github.com>",v0.34.0,2024-01-08T19:49:47+00:00,1,1,1,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff dequeues Operator arguments passed to qml.cond's branches, so conditioned functions no longer leave stray operators on the tape.",second_pass_audit
+pennylane,624766095f78812c71c134f1abcfe4121eca7b0c,2024-01-17T16:59:45+00:00,"Added tests for Lightning VJP error coverage (#5077)
+
+Codecov is failing due to these tests not being covered.",v0.35.0,2024-03-04T20:22:46+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only adds coverage tests in tests/interfaces/test_jacobian_products.py.,second_pass_audit
+pennylane,c0ce3ced1644cc552a3454fec5a09790ee5347fc,2024-01-19T21:16:53+00:00,"fix `undo_swaps` and `split_non_commuting` (#5081)
+
+When exploring in PR #5058, I found bugs in `undo_swaps` and
+`split_non_commuting`.
+
+[sc-54373]
+[sc-54374]
+
+Undo swaps had a fragile way of mapping wires, as it was created before
+we had `Operator.map_wires`. Now it works with more general operations.
+
+`split_non_commuting` was not passing the shots along. This was a silent
+issue on the old device interface, but would be causing problems if it
+was ever used with the new device interface.
+
+---------
+
+Co-authored-by: Thomas R. Bromley <49409390+trbromley@users.noreply.github.com>",v0.35.0,2024-03-04T20:22:46+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff rewrites undo_swaps to use Operator.map_wires and passes shots through split_non_commuting; both were dropping information (sc-54373/54374).,second_pass_audit
+pennylane,8546a70adc76a6c3e5ef037ede9a948ea7233285,2024-02-13T15:46:23+00:00,"[BUGFIX] Fix Pauli.to_mat() for empty PauliSentence and add case handling of empty wires (#5188)
+
+Fix https://github.com/PennyLaneAI/pennylane/issues/5187 and handle
+empty wire Identities since that is now allowed
+
+---------
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>",v0.35.0,2024-03-04T20:22:46+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff removes the 'Can't get the matrix of an empty PauliWord/PauliSentence' ValueError and returns the 1x1 matrix, fixing issue #5187.",second_pass_audit
+pennylane,9b609981a9617b77850622941db010e38e8b9038,2024-04-12T20:00:29+00:00,"Add algorithmic errors tracking to `qml.Tracker` (#5465)
+
+**Context:** Update `qml.Tracker` to track and combine error
+
+**Description of the Change:** Add algorithmic error tracking in the
+`simulator_tracking` device modifier.
+
+**Benefits:** `tracker` will track algorithmic errors. 
+
+**Possible Drawbacks:** N/A
+
+**Related GitHub Issues:** N/A
+
+---------
+
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>",v0.36.0,2024-05-06T22:01:52+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff threads algorithmic 'errors' through the tracker; a feature addition.,second_pass_audit
+pennylane,b1cc066ff5a3fc2d38c422bccf4dbe60c92e8c52,2024-04-19T18:16:55+00:00,"Update stable dependency files (#5436)
+
+Automatic update of stable requirement files to snapshot valid python
+environments.
+
+Because bots are not able to trigger CI on their own, please do so by
+pushing an empty commit to this branch using the following command:
+
+```
+git commit --allow-empty -m 'trigger ci'
+```
+
+Alternatively, wait for this branch to be out-of-date with master, then
+just use the ""Update branch"" button!
+
+Note that it is expected that the PennyLane-Lightning repo is a version
+ahead of the release, because the
+version number is taken from the dev branch. Trying to `pip install`
+from the files will fail until that
+major version of Lightning is released.
+
+If pip install fails with a not found error when installing because of
+this, it can be fixed by manually
+downgrading the PennyLane-Lightning version number in the file by 1
+version and trying again.
+
+---------
+
+Co-authored-by: GitHub Actions Bot <>
+Co-authored-by: Matthew Silverman <matthews@xanadu.ai>
+Co-authored-by: Thomas R. Bromley <49409390+trbromley@users.noreply.github.com>",v0.36.0,2024-05-06T22:01:52+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Automated refresh of the .github/stable/*.txt pinned requirement snapshots.,second_pass_audit
+pennylane,be8a22ec3a3273f956cdbca8957aa81487046dd8,2024-04-22T19:06:37+00:00,"BugFix: TorchLayer now supports shot batching (#5492)
+
+**Context:**
+`TorchLayer` raises an error when used with a shot vector.
+
+**Description of the Change:**
+- Adds support for shot batching to `TorchLayer`
+- Fixes bug in `_to_qfunc_output_type` in `qnode.py` that turns the
+entire shot-batched output, as opposed to each output in the batch, into
+the qfunc output type.
+
+**Related GitHub Issues:**
+Fixes https://github.com/PennyLaneAI/pennylane/issues/5319
+[sc-58099]",v0.36.0,2024-05-06T22:01:52+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff handles tuple/partitioned-shot results in TorchLayer.forward and _to_qfunc_output_type, so TorchLayer no longer raises with a shot vector (issue #5319).",second_pass_audit
+pennylane,1d34de9f9a3c74fe2cbbf96db463a257acf8e721,2024-05-10T18:17:09+00:00,"`jax.jit` works with `qml.probs` and finite shots (#5619)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [x] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [x] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [x] Ensure that the test suite passes, by running `make test`.
+
+- [x] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [x] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:**
+`qml.math.unique` cannot be jitted with JAX because the output shape of
+`unique` depends on the input values.
+
+**Description of the Change:**
+Use an input agnostic way to update the probs.
+
+**Benefits:**
+`qml.probs` can be jitted (without Python callbacks).
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+
+---------
+
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+Co-authored-by: Christina Lee <christina@xanadu.ai>
+Co-authored-by: David Wierichs <david.wierichs@xanadu.ai>",v0.37.0,2024-07-08T22:36:27+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,Diff adds an abstract-tracer branch to _count_samples so qml.probs with finite shots works under jax.jit instead of failing on concrete indexing.,second_pass_audit
+pennylane,df2abfa98a787cf4376b7ecba7354b5deca7dcbb,2024-05-24T10:30:29+00:00,"Fix decomposition of `StronglyEntanglingLayers` with broadcasting (#5716)
+
+**Context:**
+The decomposition of `StronglyEntanglingLayers` ""almost"" takes
+broadcasting into account: The indexing into the `weights` tensor is
+fine, but the number of layers is not determined correctly, leading to
+flawed indexing, and in particular to #5695.
+
+**Description of the Change:**
+Fix the `n_layers` determined from `weights` in `compute_decomposition`.
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+Fixes #5695 
+
+[sc-63457]",v0.37.0,2024-07-08T22:36:27+00:00,1,1,1,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff reads n_layers from shape(weights)[-3] instead of [0], correcting the indexing of broadcasted StronglyEntanglingLayers weights (issue #5695).",second_pass_audit
+pennylane,879c1e4cd4d6ab45142e7442399ba5f26c0feb8f,2024-06-10T13:53:56+00:00,"Add `resources()` to `qml.TrotterProduct` class (#5680)
+
+**Context:**
+`qml.TrotterProduct()` now has error tracking functionality, but ins't
+compatible with resource tracking. This bug fix adds native resource
+tracking functionality to allow for compatibility with both pipelines.
+
+
+![image](https://github.com/PennyLaneAI/pennylane/assets/21964864/f815b1e5-bf5d-46a0-8539-840013c51d85)
+
+**Description of the Change:**
+Inherit from `ResourcesOperation` class as well and directly implement
+the resource method.
+
+**Benefits:**
+Allows for tracking resources without decomposing the template. 
+
+**Possible Drawbacks:**
+If we change the target gate-set or want to decompose further, then this
+method is no longer accurate.
+
+**Related GitHub Issues:**
+Replicating most of this
+[PR](https://github.com/PennyLaneAI/pennylane/pull/5629) post release.
+
+---------
+
+Co-authored-by: Utkarsh <utkarshazad98@gmail.com>",v0.37.0,2024-07-08T22:36:27+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff makes TrotterProduct inherit ResourcesOperation and implements resources(); a feature addition.,second_pass_audit
+pennylane,f430d1818c788a867918f99589a683f16aec875b,2024-06-25T20:56:20+00:00,"Process density matrix (#5830)
+
+**Context:**
+Current Pennylane already defined the measurement for pure states.
+However, the same interface for density matrices is yet implemented.
+Here in this Pull Request, we aim to provide this feature.
+
+**Description of the Change:**
+- Implemented `process_density_matrix` in both `ProbabilityMP` and
+`DensityMatrixMP` to correctly handle density matrices, accommodating
+specific subsystems or rearranged wire orders.
+- Raise error if `StateMP.process_density_matrix` is called, as
+suggested at [PennyLane Issue
+#5628](https://github.com/PennyLaneAI/pennylane/issues/5628#issuecomment-2161383960).
+- Kept the intrinsic behaviour of the two new methods as close to other
+implementations that already existed as possible. Specifically, the
+`ProbabilityMP.process_density_matrix` is implemented by reading out the
+full prob dist from the dm and then constructing a new 'pseudo state' to
+be processed by `process_state`.
+- Added multiple test cases.
+
+**Benefits:**
+- **Flexibility and Robustness:** Provides versatile management of
+quantum state configurations, crucial for scenarios involving partial
+traces and wire reordering.
+- **Enhanced Performance:** Kept extra computation introduced in the
+implementations as little as possible.
+
+**Possible Drawbacks:**
+- **Potential Coupled Issue:** `ProbabilityMP.process_density_matrix`
+calls `process_state`, which means these two methods are coupled and the
+latter's performance might affect the former.
+
+**Related GitHub Issues:**
+Fixes https://github.com/PennyLaneAI/pennylane/issues/5628
+
+---------
+
+Co-authored-by: Christina Lee <chrissie.c.l@gmail.com>
+Co-authored-by: Mudit Pandey <mudit.pandey@xanadu.ai>
+Co-authored-by: Thomas R. Bromley <49409390+trbromley@users.noreply.github.com>",v0.37.0-rc0,2024-07-09T13:09:15+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds process_density_matrix to the measurement classes; a feature addition.,second_pass_audit
+pennylane,f1b5e31110a58c38712f8f3251d6bb6a76ea5cba,2024-07-12T17:37:16+00:00,"Fixing bug QSVT wire order (#5959)
+
+**Context:** 
+The order of the wires in QSVT is not maintained as they are used as a
+set internally.
+
+**issue**
+Solves issue #5965
+
+---------
+
+Co-authored-by: soranjh <40344468+soranjh@users.noreply.github.com>",v0.38.0,2024-09-03T22:26:59+00:00,1,1,1,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff replaces set union with Wires.all_wires in QSVT.__init__, so wire order is no longer scrambled by set iteration (issue #5965).",second_pass_audit
+pennylane,ddeb50cf030727896ec466a998a0e66b71ca659f,2024-07-17T20:54:52+00:00,"Change casting rules for StateMP to avoid copy in Lightning (#5995)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [x] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [x] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [x] Ensure that the test suite passes, by running `make test`.
+
+- [x] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [x] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:**
+The changes made in #5547 led to a performance regression in Lightning
+because a superfluous state vector copy is made when adding `0.j`, which
+was introduced to cast the output to complex.
+
+**Description of the Change:**
+Use `qml.math.cast` instead.
+
+**Benefits:**
+Avoid unnecessary sum of `0.j`
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+[sc-65127]",v0.38.0,2024-09-03T22:26:59+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,performance_only,Diff adjusts StateMP casting rules to avoid an extra copy in Lightning; dtype promotion behaviour is preserved.,second_pass_audit
+pennylane,94f067a257d1e2a96812d30b576bc90da5381318,2024-09-16T13:08:41+00:00,"Pennylane is compatible with numpy 2.0 (#6061)
+
+**Context:**
+
+We want to make Pennylane compatible with Numpy 2.0. After several
+discussions, we decided to test NumPy 2.0 on the CI by default in every
+PR (testing both Python versions would have been to slow). Some jobs
+still downgrade automatically to Numpy 1.x, since some interfaces (such
+as Tensorflow) still do not support NumPy 2.0.
+
+**Description of the Change:**
+
+We can distinguish the changes into 3 main categories:
+
+*Changes to workflows*
+
+- None in the final version
+
+*Changes to requirements and setup files*
+
+- Unpin the Numpy version in `setup.py` (now we also allow Numpy 2.0).
+- Update `requirements-ci.txt` to include Scipy 1.13 (this adds support
+for Numpy 2.0).
+- Pin Numpy in `requirements-ci.txt` to 2.0. 
+
+*Changes to the source code*
+- Change `np.NaN` to `np.nan`.
+- Use legacy printing representation in tests, contrary to the new numpy
+representation of scalars, e.g. np.float64(3.0) rather than just 3.0.
+- Update probabilities warning to be case insensitive and check for a
+partial match, since this warning was changed in Numpy 2.0.
+- Check the datatype of np.exp from the Global phase only for Numpy 1.x,
+since this gets promoted to complex128 in Numpy 2.x.
+https://numpy.org/neps/nep-0050-scalar-promotion.html#schema-of-the-new-proposed-promotion-rules.
+
+**Benefits:**
+
+Make Pennylane compatible with Numpy 2.0.
+
+**Possible Drawbacks:**
+
+- We need to create a separate workflow to keep testing PennyLane with
+NumPy 1.x, since we still want to maintain compatibility with previous
+NumPy versions. This will be done in a separate PR.
+
+- We are not testing Numpy 2.x for the interfaces that implicitly
+require Numpy 1.x. These currently seem to be `tensorflow` and
+`openfermionpyscf` (notice that `tensorflow` is required in some code
+sections like qcut). In particular, `openfermionpyscf` causes an error:
+```
+AttributeError: np.string_ was removed in the NumPy 2.0 release. Use np.bytes_ instead.
+``` 
+in the qchem tests. The attribute `np.string_` is not used in the PL
+source code, so it is a problem with the package itself.
+
+[sc-61399]
+[sc-66548]
+
+---------
+
+Co-authored-by: PietropaoloFrisoni <pietropaolo.frisoni@xanadu.ai>
+Co-authored-by: Pietropaolo Frisoni <pietropfrisoni@gmail.com>",v0.39.0,2024-11-05T18:51:47+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,"Diff adapts CI, requirements and tests for NumPy 2.0; production edits are an import-order directive and .gitignore entries.",second_pass_audit
+pennylane,f717b0f6f00c35f8800a518dc4b9c80325cfc8a3,2024-10-10T18:56:15+00:00,"Fix CommutingEvolution for parameter shift (#6372)
+
+`CommutingEvolution` does not correctly return `None` for its
+`grad_method` when the `Hamiltonian` is trainable.
+
+[sc-75013]
+Fixes https://github.com/PennyLaneAI/pennylane/issues/6340",v0.39.0,2024-11-05T18:51:47+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff uses qml.operation.is_trainable(hamiltonian) so CommutingEvolution reports grad_method=None for trainable Hamiltonians, preventing invalid parameter-shift gradients (issue #6340).",second_pass_audit
+pennylane,746578aa01a5ca612bc7373590c624523e055a73,2024-11-08T19:21:08+00:00,"Fix seeds for even more tests (#6491)
+
+Follow up PR to https://github.com/PennyLaneAI/pennylane/pull/6460",v0.40.0,2025-01-14T19:41:24+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only fixes random seeds across six test modules.,second_pass_audit
+pennylane,c1a7d3dcd7fe3964ce518de2e472ca59bb47df37,2024-11-08T20:01:46+00:00,"fix docs rendering wrongly in changelog (#6545)
+
+**Context:**
+
+**Description of the Change:**
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+
+---------
+
+Co-authored-by: Andrija Paurevic <46359773+andrijapau@users.noreply.github.com>",v0.40.0,2025-01-14T19:41:24+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only fixes rendering in changelog-dev.md.,second_pass_audit
+pennylane,32339ee306d7b489a5ff5980d6142579ecc553a2,2024-11-25T14:54:57+00:00,"[BugFix] - Fix the `HilbertSchmidt` template (#6604)
+
+**Context:** The `HilbertSchmidt` and `LocalHilbertSchmidt` templates do
+not work correctly since they compute the adjoint instead of the complex
+conjugate of some operators, as the algorithm requires. For details, see
+Section 4.1 of [this paper](https://arxiv.org/pdf/1807.00800)
+
+**Description of the Change:** We compute the complex conjugate instead
+of the adjoint.
+
+**Benefits:** Correct result.
+
+**Possible Drawbacks:** None that I can think of.
+
+**Related GitHub Issues:** #6586 
+
+**Related ShortCut Stories:** [sc-78349]
+
+---------
+
+Co-authored-by: Yushao Chen (Jerry) <chenys13@outlook.com>",v0.40.0,2025-01-14T19:41:24+00:00,1,1,1,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff computes the complex conjugate rather than the adjoint in HilbertSchmidt/LocalHilbertSchmidt, so the Hilbert-Schmidt test returns the correct value (issue #6586).",second_pass_audit
+pennylane,c69452167e54308b8254ab4b319d22fb66dede34,2025-02-20T17:49:53+00:00,"Fix certain `pylint=3.3.4` errors in source code (#6980)
+
+**Context:**
+
+After running the latest version of `pylint` on our codebase, several
+important errors were highlighted.
+
+![pylint_heatmap](https://github.com/user-attachments/assets/f27059cf-b610-42a9-8e45-37ba8ee22cd1)
+
+This PR updates the source code to follow best practices.
+
+**Description of the Change:** 
+
+Restructured some logic to fix certain errors.
+
+**Benefits:** Improved code quality.
+
+**Possible Drawbacks:** `too-many-arguments` and
+`too-many-positional-arguments` will not be addressed in this PR.
+
+[sc-84776]",v0.41.0,2025-04-15T18:55:55+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,style_only,"Diff restructures code to satisfy pylint 3.3.4 (encoding=, timeout=, branch reordering); motivation is lint compliance.",second_pass_audit
+pennylane,4fcabe2acbf81945ee76d8134b4a85e9ece2a3fe,2025-03-19T18:32:56+00:00,"[Capture] support DQ preprocessing during execution (#7057)
+
+> Note: This PR was overtaken by @andrijapau.
+
+**Context:**
+
+Prior to this PR, execution on a device by-passed any required
+pre-processing.
+
+**Description of the Change:**
+
+A few things changed in this PR,
+- A new implementation for decomposition of control higher order
+primitives (HOPs). Decompose should now convert the `ctrl_prim` HOP into
+individually controlled ops *without* unrolling any control flow.
+- Added support for device pre-processing for DQ during execution. 
+> Note: (LQ pre-processing is handled in
+https://github.com/PennyLaneAI/pennylane-lightning/pull/1084)
+- Added support for propagation of `mcm_method` and `postselect_mode`.
+In-compatible workflows will not be supported at this stage and error
+out.
+
+Follow up PR to unskip LQ tests can be found here:
+https://github.com/PennyLaneAI/pennylane/pull/7089
+
+**Benefits:** Device pre-processing is now taken into account.
+
+**Possible Drawbacks:** None identified.
+
+[sc-84017] [sc-85244]
+
+---------
+
+Co-authored-by: Pietropaolo Frisoni <pietropaolo.frisoni@xanadu.ai>
+Co-authored-by: Andrija Paurevic <46359773+andrijapau@users.noreply.github.com>
+Co-authored-by: andrijapau <andrija.paurevic@xanadu.ai>
+Co-authored-by: Christina Lee <christina@xanadu.ai>",v0.41.0,2025-04-15T18:55:55+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds device preprocessing support to the capture execution path; a feature addition.,second_pass_audit
+pennylane,13bf0f2725b163e357d8a67beb355de400935080,2025-04-25T21:17:03+00:00,"Adding template `qml.SelectPauliRot` (#7206)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [x] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [x] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [x] Ensure that the test suite passes, by running `make test`.
+
+- [x] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [x] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:**
+
+This operator, also called multiplexed rotation, applies a sequence of
+uniformly controlled rotations to a target qubit.
+
+[sc-87474]
+
+**Description of the Change:**
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**
+
+---------
+
+Co-authored-by: Utkarsh <utkarshazad98@gmail.com>
+Co-authored-by: Jay Soni <jbsoni@uwaterloo.ca>
+Co-authored-by: Isaac De Vlugt <34751083+isaacdevlugt@users.noreply.github.com>
+Co-authored-by: Soran Jahangiri <40344468+soranjh@users.noreply.github.com>",v0.42.0,2025-07-15T15:32:01+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds the new qml.SelectPauliRot template.,second_pass_audit
+pennylane,04c4144574cfe15ce4329c529ff7cff09489f63b,2025-06-05T20:09:07+00:00,"Add `filecheck` tests for xDSL `cancel_inverses` and `merge_rotations` passes (#7595)
+
+[sc-92245]
+
+* Add lit tests for `IterativeCancelInversesPass` and
+`MergeRotationsPass`.
+* Add `run_filecheck` fixture to make it easier to use the `filecheck`
+utility.
+* Fix issues found with both passes when dealing with controlled gates
+during testing.
+
+Blocked by #7590 as I would like to update the tests to use the custom
+assembly format of `CustomOp` instead of the generic syntax.",v0.42.0,2025-07-15T15:32:01+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Primary content is filecheck/lit tests and a conftest fixture for the xDSL passes; the small pass edits were found while writing those tests.,second_pass_audit
+pennylane,5efcd2625f56e369c1cef6bf7223e13610846b8d,2025-07-29T19:15:55+00:00,"Stop queuing due to decompositions from within `qml.matrix`. (#7976)
+
+**Context:**
+`qml.matrix` leaks queued ops from decompositions.
+
+**Description of the Change:**
+Fix the leak.
+
+**Benefits:**
+No leak.
+
+**Possible Drawbacks:**
+N/A
+
+**Related GitHub Issues:**
+#7975 
+[sc-96525]
+
+---------
+
+Co-authored-by: Yushao Chen (Jerry) <chenys13@outlook.com>",v0.43.0,2025-10-15T17:52:37+00:00,1,1,1,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff wraps op.decomposition() in QueuingManager.stop_recording(), so qml.matrix no longer leaks decomposed operations onto the active tape.",second_pass_audit
+pennylane,5e0f2799eefeff08e26140d248b3588cb3c81566,2025-09-22T01:49:42+00:00,"add safety check convert to mbqc transform (#8314)
+
+### Before submitting
+
+Please complete the following checklist when submitting a PR:
+
+- [ ] All new features must include a unit test.
+If you've fixed a bug or added code that should be tested, add a test to
+the
+      test directory!
+
+- [ ] All new functions and code must be clearly commented and
+documented.
+If you do make documentation changes, make sure that the docs build and
+      render correctly by running `make docs`.
+
+- [x] Ensure that the test suite passes, by running `make test`.
+
+- [x] Add a new entry to the `doc/releases/changelog-dev.md` file,
+summarizing the
+      change, and including a link back to the PR.
+
+- [x] The PennyLane source code conforms to
+      [PEP8 standards](https://www.python.org/dev/peps/pep-0008/).
+We check all of our code against [Pylint](https://www.pylint.org/).
+      To lint modified files, simply `pip install pylint`, and then
+      run `pylint pennylane/path/to/file.py`.
+
+When all the above are checked, delete everything above the dashed
+line and fill in the pull request template.
+
+
+------------------------------------------------------------------------------------------------------------
+
+**Context:**
+
+Given that decompose to mbqc gate set pass is not ready yet, we need to
+add safety check to ensure the convert_to_mbqc_formalsim pass only works
+for the MBQC gate set.
+
+**Description of the Change:**
+
+**Benefits:**
+
+**Possible Drawbacks:**
+
+**Related GitHub Issues:**",v0.43.0,2025-10-15T17:52:37+00:00,1,0,0,1,v0.4.0,0,1162,289,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff raises NotImplementedError for CustomOps in the MBQC conversion pass; unsupported gates were previously passed through silently, yielding a circuit that was not in MBQC form.",second_pass_audit
+pennylane,77e2dd0f08022f2726b9979a913bcac9507b3552,2025-09-29T15:26:37+00:00,"[CI] fix CI due to the updated expected mcm config (#8347)
+
+**Context:**
+
+Parts of py3.12 3.13 tests on
+`test_resolved_construction_lightning_qubit` failed.
+
+https://github.com/PennyLaneAI/pennylane/actions/runs/18042712217/job/51345679701
+
+According to [a recent Lightning
+change](https://github.com/PennyLaneAI/pennylane-lightning/commit/199a740cf3e2326b0b489caccdb73aef3acd899f#diff-068e2aa5237a375b6af67a124f81018aa46c2d335fecf3035346f0627e6ef7a4R483-R500)
+The expectation of `mcm_config` when `shots=None` should be changed
+correspondingly
+
+**Description of the Change:**
+
+**Benefits:**
+
+**Possible Drawbacks:**
+We should also figure out why py3.11 tests did not reveal this failure?
+
+**Related GitHub Issues:**
+[sc-100270]",v0.43.0,2025-10-15T17:52:37+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only updates the expected mcm_config in tests/workflow/test_construct_execution_config.py.,second_pass_audit
+pennylane,966703145177831719e757c17195d51fd22014c2,2025-10-06T01:07:53+00:00,"[doctest] fix docstrings in `ftqc` module (#8386)
+
+Cleans up the docstrings in the ftqc module.
+
+[sc-100797]",v0.43.0,2025-10-15T17:52:37+00:00,1,0,0,1,v0.4.0,0,1162,289,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only cleans up docstrings and doctest directives in the ftqc module.,second_pass_audit
+qiskit,07c8f20481813493eae80164731794fccdc1de3d,2024-05-14T20:47:29+00:00,Fix two cross-references in `BasisTranslator` docstring (#12398),1.2.0rc1,2024-08-01T16:55:28+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only repairs two Sphinx cross-references in the BasisTranslator docstring.,second_pass_audit
+qiskit,8b569959d046614e338e100cb8033e5918e778eb,2024-05-17T00:58:50+00:00,Fix `qiskit.circuit` method header and broken cross-reference (#12394),1.2.0rc1,2024-08-01T16:55:28+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only fixes a method header and cross-reference in the qiskit.circuit module docstring.,second_pass_audit
+qiskit,9f4a474e97d356163caa6fac430ce28313e8ed51,2024-06-06T13:36:10+00:00,Fix version table in qpy docs (#12512),1.2.0rc1,2024-08-01T16:55:28+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff fixes the list-table directive and a version number in the QPY module docstring.,second_pass_audit
+qiskit,05d5b98304eecca05feb6a2aeb2411911455d42d,2024-07-01T20:50:06+00:00,Fix bad Sphinx syntax in several release notes and in API documentaiton (#12604),1.2.0rc1,2024-08-01T16:55:28+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only corrects Sphinx role syntax in release notes and the pulse schedule docstrings.,second_pass_audit
+qiskit,d86f9958516ee7f48359ddc7364050bb791602d1,2024-07-09T10:25:54+00:00,Fix `C3SXGate` `to_matrix` method (#12742),1.2.0rc1,2024-08-01T16:55:28+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff applies with_controlled_gate_array(_SX_ARRAY,...) to C3SXGate so to_matrix returns the correct unitary.",second_pass_audit
+qiskit,c3b468c832a1770f7b9303703c06f4c12e5f3aba,2024-07-16T13:24:21+00:00,Fix pass-manager drawing tests for pydot 3.0 (#12775),1.2.0rc1,2024-08-01T16:55:28+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff updates .dot reference files and reorders pydot kwargs so the drawer tests pass under pydot 3.0; rendered graphs are equivalent.,second_pass_audit
+qiskit,85f98605a6488d9e25e5cd04eedc3687ebece614,2024-07-30T13:23:26+00:00,Fix parsing of huge OpenQASM 2 conditionals (#12774),1.3.0b1,2024-09-11T21:04:38+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff moves OpenQASM 2 conditional values to BigUint in the Rust lexer/parser/bytecode, so huge integer conditions no longer fail to parse.",second_pass_audit
+qiskit,154601ba77b1d21d1f456754e72888d4d684cf7c,2024-08-08T10:08:16+00:00,Fix warnings with latest clippy (#12919),1.3.0b1,2024-09-11T21:04:38+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,style_only,Diff only silences newer clippy lints in target_transpiler.,second_pass_audit
+qiskit,8929e12bab1cefb429eb1ea3b59a9f98a2b09c55,2024-09-10T15:30:00+00:00,Fix the matrix representation of CUGate in Rust (#13121),1.3.0b1,2024-09-11T21:04:38+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,Diff swaps the transposed exp(i(gamma+phi)) and exp(i(gamma+lam)) entries in the Rust cu_gate matrix.,second_pass_audit
+qiskit,ccfcef8084584b6760e606b052292d65a4baa91d,2024-11-01T18:30:09+00:00,Add `global_phase` to `CircuitData::{__reduce__|__eq__}` (#13346),1.3.0rc1,2024-11-07T22:30:08+00:00,0,1,1,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff adds global_phase to CircuitData::__reduce__ and __eq__, so pickle round-trips and equality no longer drop the global phase.",second_pass_audit
+qiskit,94cea419010b0c8210ef633bf39d4a89618ade01,2024-11-18T22:50:28+00:00,Fix post-oxidization change in `ConsolidateBlocks` behavior  (#13450),2.0.0rc1,2025-03-10T12:37:53+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,regression_fix,,"Diff restores ConsolidateBlocks behaviour changed by the Rust port: the decomposer is set to None when no KAK gate matches, and rzz/rzx paths are re-added.",second_pass_audit
+qiskit,6f0a176e31b263c26ebb2d3b43303051e67e1cd5,2024-12-09T12:34:15+00:00,Fix registering `global_phase` parameters when creating `CircuitData` (#13538),2.0.0rc1,2025-03-10T12:37:53+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff routes global_phase through set_global_phase when constructing CircuitData so its parameters are registered in the parameter table.,second_pass_audit
+qiskit,b933179837a831223ce84b9bee8002c92cdf23e9,2025-02-13T09:08:25+00:00,Fix tracking of routing permutation in Sabre with disjoint backends (#13833),2.0.0rc1,2025-03-10T12:37:53+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff fills in physical qubits from unused coupling-map components, so Sabre's final_layout permutation is complete on disjoint backends.",second_pass_audit
+qiskit,67c740601d20032d4c13007940696b611640aa02,2025-02-24T12:23:58+00:00,doc fix (#13914),2.0.0rc1,2025-03-10T12:37:53+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff corrects 'ZXY' to 'ZYX' in a sparse_observable docstring example.,second_pass_audit
+qiskit,1f825d6eaab0f5f54d9456531bd65dd3a03c9cdb,2025-03-02T09:10:39+00:00,Fix performance regression in circuit_to_instruction (#13942),2.0.0rc1,2025-03-10T12:37:53+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,performance_only,Diff replaces the per-instruction isinstance scan with a CONTROL_FLOW_OP_NAMES/count_ops intersection to undo a ~9x slowdown; the raised error is unchanged.,second_pass_audit
+qiskit,6f317f953363e076a998f4e0960196ec605b4fb2,2025-03-11T15:18:15+00:00,Minor fix to UnitarySynthesis with RZZ and CZ gates (#13987),2.1.0rc1,2025-06-05T18:28:38+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff reorders decomposer selection so TwoQubitControlledUDecomposers are tried first, fixing UnitarySynthesis for RZZ/CZ target bases.",second_pass_audit
+qiskit,ddd04013fb27b2c14e0ea860dba42ce83f68100a,2025-03-18T09:27:21+00:00,Fix deepcopy/pickle of `DAGCircuit` variable IO nodes (#14041),2.1.0rc1,2025-06-05T18:28:38+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff corrects NodeType::VarIn to VarOut in DAGCircuit::pack_into, so deepcopy/pickle of variable output nodes is no longer wrong.",second_pass_audit
+qiskit,0f7c6f64fe91ed55ee0091f9525319a4db54fc56,2025-03-28T08:34:47+00:00,Fix qpy for `MCMTGate` (#14096),2.1.0rc1,2025-06-05T18:28:38+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,Diff registers MCMTGate as a custom operation in the QPY writer so circuits containing it can be serialised and reloaded.,second_pass_audit
+qiskit,99d0fa99cd81258946bf3973ac046a1442609eb6,2025-04-01T18:57:05+00:00,Fix: Incorrect initialization of `BackendV2` for `transpiler_level` ASV tests. (#14152),2.1.0rc1,2025-06-05T18:28:38+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only fixes BackendV2 construction in test/benchmarks/transpiler_levels.py.,second_pass_audit
+qiskit,4e9231df97921703fc39494d249ab056b0021fa1,2025-05-21T14:17:40+00:00,Fix ConsolidateBlocks pass for collecting non-CX KAK gate (#14417),2.1.0rc1,2025-06-05T18:28:38+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,regression_fix,,"Diff restores the KAK basis gate name tracking broken by #13884, so ConsolidateBlocks counts non-CX basis gates correctly again.",second_pass_audit
+qiskit,284d59398f48767fe69564431a2cae884a99ea52,2025-06-06T11:38:31+00:00,Fix index.rst to have alphabetical order (#14549),2.2.0b1,2025-08-28T17:59:50+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only reorders an entry in docs/apidoc/index.rst.,second_pass_audit
+qiskit,0427d9bfcc2b63c832337357cd22ae706414b0b3,2025-06-23T16:19:20+00:00,Fix indendation of bit array docs (#14649),2.2.0b1,2025-08-28T17:59:50+00:00,1,0,0,1,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only fixes docstring indentation in bit_array.py.,second_pass_audit
+qiskit,42f999905e937924ee28bc91207a334e819ec83a,2025-07-21T00:21:28+00:00,Fix simplify to sum duplicates before applying tolerance (#14194) (#14425),2.2.0b1,2025-08-28T17:59:50+00:00,1,1,1,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff sums duplicate Pauli terms before applying the tolerance in SparsePauliOp.simplify, so near-cancelling duplicates are no longer dropped incorrectly.",second_pass_audit
+qiskit,1e7a3fe3535f2623eb77f0a068cfdcd11e1dd272,2025-08-13T16:33:02+00:00,Fix QASM3 export of Delay with 'ps' units. (#14895),2.2.0b1,2025-08-28T17:59:50+00:00,1,0,0,1,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff changes 1000*duration to duration/1000 when exporting picosecond Delay durations to QASM3, correcting a factor-of-10^6 error.",second_pass_audit
+qiskit,d6a1706306b0604173d805ad2cdbfba428d2efce,2025-09-05T16:34:54+00:00,Fix doc format in circuit library (#14988),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff reformats docstrings and reference sections across 90 circuit-library files.,second_pass_audit
+qiskit,41361d62dc3ca21efc1f27ec3340caf9070a3e1b,2025-09-23T04:54:23+00:00,Fix `SparseObservable` C API test invoking UB (#15049),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only replaces an undefined-behaviour C test in test/c/test_sparse_observable.c.,second_pass_audit
+qiskit,724bf488d27c962c80b984427d06174c14c76e1e,2025-10-27T12:55:45+00:00,Fix: Correctly link C documentation to the C domain (#15250),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff sets the breathe domain for .h files in docs/conf.py and adjusts release-note references.,second_pass_audit
+qiskit,4019fd9d91e2d562978ff8fe0d0dda2c7c8c2e61,2025-10-28T18:23:08+00:00,Fix reuse of `ConsolidateBlocks` instances (#15258),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff moves the recursion qubit map from pass instance state into the PropertySet, so reusing a ConsolidateBlocks instance no longer carries stale state.",second_pass_audit
+qiskit,5243ecc232805ec9bd4e054b0667005c2c37e31b,2025-11-15T07:52:17+00:00,fix: preserve identity 'I' characters in PauliEvolutionGate labels (#15173),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff pairs bit_labels with term.indices when building PauliEvolutionGate labels, so identity terms and index positions are represented correctly instead of being dropped and reversed.",second_pass_audit
+qiskit,ba2f4cef2f1500d1c1b1ad0e852fd9e116c07dfd,2025-12-04T19:05:50+00:00,Fix typos in StatevectorEstimator docstring (#15395),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only fixes typos and a cross-reference in the StatevectorEstimator docstring.,second_pass_audit
+qiskit,11801be6ba1fadb88c5045d6f7dbd0dd266f75ff,2025-12-09T21:46:40+00:00,Fix ``QkObs`` docs (#15429),2.3.0rc1,2025-12-11T23:17:24+00:00,1,0,0,0,0.3,0,259,155,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only reformats C API doc comments in crates/cext/src/sparse_observable.rs.,second_pass_audit
+qsharp,eb3781450bbbcf238227980dfb7206fa40de10f0,2023-09-20T16:19:16+00:00,"Show correct queue time (#742)
+
+Fixed #740",v1.0.33,2024-01-11T22:18:04+00:00,0,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff adds shouldShowQueueTime/getQueueTimeText, which fixes the tree view reporting a seconds value labelled as minutes and hiding 0-second queues (issue #740).",second_pass_audit
+qsharp,5472ac1c335d58e246c3a9c037a3b6dc92e336eb,2023-09-26T17:11:10+00:00,"Update error handling of floating doc comments (#688)
+
+Closes #652 
+
+Checks if doc comments on an `Item` that fails to parse are non-empty.
+Pushes an error, `ErrorKind::FloatingDocComment(span)`, and returns an
+error `Item` so that the parser will continue. This returns only a
+single, more helpful error message for floating doc comments and doesn't
+consume the closing curly brace.
+
+Notes: If compilation _shouldn't fail_ because of floating doc comments,
+there could be a recovery step for the error that also removes the error
+`Item`.
+
+---------
+
+Co-authored-by: Chris O'Brien <obrchr96@gmail.com>
+Co-authored-by: Alex Hansen <alex@alex-hansen.com>
+Co-authored-by: Stefan J. Wernli <swernli@microsoft.com>",v1.0.33,2024-01-11T22:18:04+00:00,1,1,1,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff makes parse_doc return Option and pushes a FloatingDocComment error; an error-reporting quality improvement for already-invalid input.,second_pass_audit
+qsharp,5a40497f67a6121c41e5ed6de50eab2a48803f7d,2023-10-03T23:05:08+00:00,"Fix repeated auth prompts and GUID generation (#765)
+
+Fixes #727 
+
+Also, fixed an issue where GUID generation was dropping chars (if a
+random byte was less than < 0x10).",v1.0.33,2024-01-11T22:18:04+00:00,1,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff adds getAuthSession with a silent-then-createIfNone flow and zero-pads GUID bytes below 0x10 that were previously dropped (issue #727).,second_pass_audit
+qsharp,137b3f0693b02abb74d80145545948a171735496,2023-10-25T19:04:46+00:00,"Typechecking doesn't support UDTs that reference other UDTs in the standard library (#818)
+
+Fixes #813",v1.0.33,2024-01-11T22:18:04+00:00,0,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff carries the package id through UDT inference in typeck/infer.rs, so stdlib UDTs referencing other UDTs typecheck instead of erroring (issue #813).",second_pass_audit
+qsharp,36a45937141a5194a71e98a9f96ce1f4968f9fe6,2023-10-27T18:12:48+00:00,"Fix handling of stdlib UDTs in language service (#814)
+
+Fixes #808.
+
+Basically, when follow a reference to a UDT in the HIR through
+[`qsc_hir::ty::Ty::Udt(res)`](https://github.com/microsoft/qsharp/blob/70b107ca8bb7575bb5c7861b17788e217d12f71d/compiler/qsc_hir/src/ty.rs#L42C14-L42C14),
+we need to be cognizant of the `PackageId` that that UDT reference came
+from.
+
+Why?
+
+`qsc_hir::hir::ItemId` uses `None` package id to indicate ""local""
+package.
+https://github.com/microsoft/qsharp/blob/70b107ca8bb7575bb5c7861b17788e217d12f71d/compiler/qsc_hir/src/hir.rs#L172-L177
+
+`qsc_hir::hir::Res` uses `ItemId` to associate HIR nodes with
+resolutions.
+
+
+https://github.com/microsoft/qsharp/blob/70b107ca8bb7575bb5c7861b17788e217d12f71d/compiler/qsc_hir/src/hir.rs#L191-L198
+
+When the resolution lives in the same package as the HIR node, the
+`PackageId` in `ItemId` is `None`, to indicate the ""local"" package. The
+problem is, the ""local"" package is relative to where the HIR node came
+from in the first place. So if all we have is the HIR node struct, we
+don't have the ability to resolve the item correctly in the
+`PackageStore`.
+
+
+The fix is to make sure we keep track of the current `PackageId` when
+we're following UDT resolutions, and when we're passing around any HIR
+node that _could_ contain a UDT reference. This involves a lot of
+annoying plumbing of the ID through all of the language service
+features.",v1.0.33,2024-01-11T22:18:04+00:00,1,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff makes the language service track the PackageId of UDT references (user_unit vs std), fixing hover/definition/completion resolution for stdlib UDTs (issue #808).",second_pass_audit
+qsharp,b44115344fa3f98f56288bd2c3799149ca2be639,2023-11-10T17:51:33+00:00,"Update @vscode/test-web for integration test stability fix (#847)
+
+Contains a fix for
+https://github.com/microsoft/vscode-test-web/issues/106 . I see at least
+one 504 error in main in the last couple of weeks, so this should
+improve stability.
+
+I'll continue to monitor the integration tests after this and reenable
+them on PRs if they're stable.",v1.0.33,2024-01-11T22:18:04+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Diff only bumps @vscode/test-web in package.json/package-lock.json.,second_pass_audit
+qsharp,849ee4492a8f7923ed9229b2ba08ace92ac005b5,2023-11-27T22:30:19+00:00,"LS and Error Display Refactor (#862)
+
+Refactors the language server and error display of type parameters and
+UDT's. These types now have `Rc<str>` for their names, avoiding us to
+drop a lot of complex lookup logic. The display logic for the types was
+also moved from the language server's display.rs to the `.display()` on
+the `Ty` struct.
+As a result of these changes, error messages can now print a
+user-friendly display of types like type parameters and UDT's.",v1.0.33,2024-01-11T22:18:04+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff carries Rc<str> names on type params and UDTs and moves display logic onto Ty; restructuring across 29 files.,second_pass_audit
+qsharp,02dab0f79a28eac7ab307d793b6d470758acd528,2024-01-16T20:14:08+00:00,"Multi Qubit Katas (#1016)
+
+Added better feedback to the Multi-Qubit Systems katas, and changed
+documentation to reflect little-endian format of `DumpMachine`.
+
+Fixes #773",v1.1.1,2024-01-30T19:16:51+00:00,0,1,1,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,"Diff rewrites kata verification operations to use CheckOperationsEquivalenceOnZeroStateStrict and updates kata prose; educational content, not SDK behaviour.",second_pass_audit
+qsharp,65a7fffcf5f7aef50357a7815cbcd363349ea324,2024-02-03T02:03:49+00:00,"Update spans used for some type mismatch errors (#1098)
+
+This change adds some additonal logic to better select error spans and
+expected/actual types for both if-expressions and callable blocks.
+
+Fixes #970",v1.1.3,2024-02-08T20:29:32+00:00,1,1,1,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff selects better spans and expected/actual types for type mismatch diagnostics; the set of accepted programs is unchanged.,second_pass_audit
+qsharp,0adc1c382d78e3015bb7f181d0a011452a051c84,2024-02-05T21:23:59+00:00,"Fix `documenttype` for `OpenedDocument` event (#1121)
+
+The `OpenedDocument` event includes either `Qsharp` or `JupyterCell` for
+its document type, but the query was causing all documents to be treated
+as `Qsharp`. Swapping the ordering so we can correctly distinguish cells
+for this event.",v1.1.3,2024-02-08T20:29:32+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff reorders the isQsharpNotebookCell/isQsharpDocument test, which had been classifying every notebook cell as a Q# document.",second_pass_audit
+qsharp,1fccd44424fad02d1eefd0c7a935205164ce4450,2024-02-06T18:17:21+00:00,"Fix state ordering in Python (#1122)
+
+This change uses the vector returned from the internals directly rather
+than converting into a hashmap so that the state ordering can be
+preserved for display.
+
+Fixes #1119
+
+Before:
+
+![image](https://github.com/microsoft/qsharp/assets/10567287/4ff3d4d1-021b-4b27-b797-266312cc13cc)
+
+After:
+
+![image](https://github.com/microsoft/qsharp/assets/10567287/eff67e4e-a756-45e3-b246-16829f9befcf)",v1.1.3,2024-02-08T20:29:32+00:00,1,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,incorrect_output,,"Diff stores DisplayableState as a Vec instead of an FxHashMap, so the Python state dump prints basis states in the correct order (issue #1119).",second_pass_audit
+qsharp,27c6e032b932967946fa15addc95821847421cee,2024-02-07T18:48:27+00:00,"Set notebook cell language back to Python if `%%qsharp` magic isn't there (#1118)
+
+Fixes #1117",v1.1.3,2024-02-08T20:29:32+00:00,0,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff records the notebook's default language and restores it when the %%qsharp magic is removed; cells were previously stuck in Q# (issue #1117).,second_pass_audit
+qsharp,80d5550d26031d0b66cd10c0dac3dba0cb0a37b0,2024-02-14T22:23:46+00:00,"Fix hover type shown for lambda passed to generic function (#1161)
+
+This fixes the issue by adding the original functor set for any functor
+params to the data structure and updates the custom display used in
+hover to print the actual functors rather than the param.
+
+Fixes #1148",v1.2.0,2024-02-29T00:04:06+00:00,1,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff carries the original functor set on FunctorSet::Param, so hover shows the actual functors of a lambda passed to a generic function rather than the parameter (issue #1148).",second_pass_audit
+qsharp,e7ee0650d31928909fdba0358e2df410ebb68265,2024-03-13T20:29:04+00:00,"Make Base Profile result type check specific to entry expressions (#1256)
+
+Fixes #1246
+
+The current base profile result type check was overly broad, because it
+ran the check on all fragments (not just entry expressions).
+
+This was because during incremental compilation, entry expressions were
+added to the AST package as a top-level statement. After that point, the
+passes could not differentiate between the entry expression and a
+top-level statement.
+
+We don't _actually_ have to convert the entry expression to a statement
+- we can just keep the entry expression in the `entry` field in the AST
+and HIR. So, now, if passes want to apply any special treatment to the
+entry expression, they have enough information to do so.",v1.3.0,2024-03-21T16:19:38+00:00,0,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff keeps entry expressions as expressions instead of lowering them to top-level statements, so the Base Profile result check stops rejecting ordinary fragments (issue #1246).",second_pass_audit
+qsharp,9c4a70625ac7ef8e5bfd028cd49ba1d8033aaf99,2024-03-14T20:35:53+00:00,"Update `dump_machine` and `dump_operation` based on feedback (#1227)
+
+This updates the Python functions for dumping state vectors and
+operation matrices to both use complex numbers, provide
+better compatibility with input, and allow for common iteration
+patterns.
+
+Fixes #1178
+Fixes #1177
+Fixes #1223",v1.3.0,2024-03-21T16:19:38+00:00,0,1,1,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,"Diff reworks the dump_machine/dump_operation Python API (StateDump -> StateDumpData, complex values); an API redesign from feedback.",second_pass_audit
+qsharp,ffaf5c2cefb603d878093976a985ee293bd6416f,2024-04-10T18:18:29+00:00,"Update language service when manifest is saved. (Closes #1284) (#1366)
+
+This PR enables sending document-updates to a given project documents
+when its manifest is edited and saved.
+
+
+
+https://github.com/microsoft/qsharp/assets/156957451/9d528103-97f3-4a53-858b-0b05b4b2b707",v1.4.0,2024-04-23T16:44:37+00:00,0,1,1,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff adds manifest save/delete watchers that refresh project documents; a feature addition.,second_pass_audit
+qsharp,b3a81a2071364435b06c583131a39c929d9bb851,2024-04-17T18:27:15+00:00,"Fix completion auto-open position in notebook cells (#1398)
+
+Fix regression in #1310
+
+Bug: 
+
+
+![auto-open-broke](https://github.com/microsoft/qsharp/assets/16928427/0c313bc4-69f1-4b19-a779-d9c483339123)
+
+
+Fix:
+
+
+![auto-open-fixed-2](https://github.com/microsoft/qsharp/assets/16928427/4029d801-1818-4399-9a51-1ffe34ce3f11)
+
+
+![auto-open-fixed-1](https://github.com/microsoft/qsharp/assets/16928427/d8cacd35-1414-4b50-bf23-c50bc1eba8f7)",v1.4.0,2024-04-23T16:44:37+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,regression_fix,,"Diff skips the //qsharp magic when computing the first non-whitespace offset, restoring completion auto-open in notebook cells broken by #1310.",second_pass_audit
+qsharp,8865f0c76853848af21c6597b16bf39e4adab5bf,2024-04-17T19:09:59+00:00,Fix path for moved package (#1399),v1.4.0,2024-04-23T16:44:37+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,build_only,"Diff corrects a package.json path in version.py, the release versioning script.",second_pass_audit
+qsharp,ebcce2592591b8ebcd4f5ec76961664b060d8d3f,2024-05-13T16:46:54+00:00,"Fix SSA panic due to unpropagated variable mapping (#1510)
+
+This fixes a panic in SSA that results from variable mapping updates not
+propagating to a block that has a single predecesor. This is corrected
+by treating that single predecessor block variable map as the update map
+for the current block during the transformation step.",v1.6.0,2024-06-06T16:28:35+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff seeds var_map_updates from the single predecessor's map in ssa_transform, fixing a panic caused by unpropagated variable mappings.",second_pass_audit
+qsharp,2d8088245f2c549757dde3b71dd67c492ea135bc,2024-05-14T03:55:04+00:00,"Fix for logic based on `CallToUnresolvedCallee` flag (#1519)
+
+The check for the dynamism of the return from unresolved callees
+incorrectly ended up applying to calls where the flag had propagated
+from another call site, including the entry point callable itself. This
+change introduces new infra to track the call expression that introduced
+the flag as opposed to all calls the flag had propagated to, which keeps
+the desired protection but avoids rejecting other call expressions.",v1.6.0,2024-06-06T16:28:35+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff tracks the call expression that introduced CallToUnresolvedCallee instead of every call the flag propagated to, so valid calls are no longer rejected.",second_pass_audit
+qsharp,ae1ff326c017222a0c370f318e78092c5b9bdd32,2024-06-18T20:04:48+00:00,"Clean unsupported chars from implicit namespace name (#1635)
+
+This change adds some simple logic to clean up unsupported characters
+from file names before they are used as implicit namespace names. It is
+by no means exhaustive, but at least takes `-`, `:`, and ` ` (space) and
+replaces them with `_`. This will applied for all files, including
+unsaved ones, so a file saved to disk as `My Cool-File.qs` would become
+the namespace `My_Cool_File` and VS Code's somewhat quirky names for new
+unsaved file buffers like `untitled:Untitled-1` become
+`untitled_Untitled_1`. This allows skipping explicit namespaces in
+unsaved new files, fixes #1582.",v1.7.0,2024-07-24T23:20:25+00:00,0,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff sanitises '-', ':' and spaces into '_' and handles ':' as a path separator, so files such as untitled:Untitled-1 get a usable implicit namespace instead of an error (issue #1582).",second_pass_audit
+qsharp,b973e65c5d5e54ba2897c8e59217e826a1fe9fe3,2024-06-28T16:24:48+00:00,"Fix for ""Simplify dependencies handling for exercises in katas"" #1640 (#1674)
+
+Link to the issue: https://github.com/microsoft/qsharp/issues/1640
+
+The following changes were done:
+1. qsDependencies property is no longer processing
+(generate_katas_content.js)
+2. ../KatasLibrary.qs is included as implicit dependency
+3. ./Common.qs is included as implicit dependency if present in current
+kata
+4. All qsDependencies properties are removed from index.md's
+5. README.md is updated - reference to qsDependencies is removed
+
+Testing done:
+1. ""Happy path"": Windows cmd build: ""python ./build.py --wasm --npm
+--play"" - success
+   Local playground manual testing - no impact (Chrome and Edge)
+2. No impact when qsDependencies are present in index.md
+3. No impact when qsDependencies are present and empty in index.md
+
+Question: should Ubuntu build be tested?",v1.7.0,2024-07-24T23:20:25+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,refactor,Diff drops the qsDependencies property in favour of implicit KatasLibrary.qs/Common.qs dependencies; build-content restructuring.,second_pass_audit
+qsharp,9f4920a51c7983d221074b55c96d4616850cdf2e,2024-06-30T19:46:46+00:00,"Fix display of CCX in a Circuit (#1685)
+
+A Toffoli/CCX in Q# code is currently displayed by the circuit
+generation code as a controlled-controlled-CNOT instead of a
+controlled-controlled-X.
+
+I tried to add a test for this, but I'm not sure if I added it in the
+right place.
+
+### Testing
+Ran `cargo test` and `pytest` (including the integration tests dependent
+on qir-runner and pyqir)
+
+Also manually tested with this script:
+```python
+import qsharp
+
+qsharp.eval('''
+open Microsoft.Quantum.Arrays;
+
+operation Example() : Result[] {
+    use q = Qubit[3];
+    ApplyToEach(X, Most(q));
+    CCNOT(q[0], q[1], q[2]);
+    MResetEachZ(q)
+}
+''')
+
+print(qsharp.circuit('Example()'))
+```
+
+which originally printed out:
+```
+q_0    ── X ──── ● ──── M ─── |0〉 ─                                                                                                                                                                               
+                 │      ╘══════════
+q_1    ── X ──── ● ──── M ─── |0〉 ─
+                 │      ╘══════════
+q_2    ──────── CX ──── M ─── |0〉 ─
+                        ╘══════════
+```
+but now it prints out the following as expected:
+```
+q_0    ── X ──── ● ──── M ─── |0〉 ─
+                 │      ╘══════════
+q_1    ── X ──── ● ──── M ─── |0〉 ─
+                 │      ╘══════════
+q_2    ───────── X ──── M ─── |0〉 ─
+                        ╘══════════
+```",v1.7.0,2024-07-24T23:20:25+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff changes the circuit builder so CCNOT renders as controlled-controlled-X rather than controlled-controlled-CNOT, correcting the drawn gate.",second_pass_audit
+qsharp,4bac63625b785a539582a13625ecc255c679d7cc,2024-07-08T19:31:24+00:00,"Don't throw missing entrypoint error if package type is library (#1702)
+
+The `packageType` property was not getting properly propagated from the
+manifest all the way to the `PackageInfo`. This PR fixes that.
+
+
+
+https://github.com/microsoft/qsharp/assets/12157751/33395cde-5d81-4ff1-8b7c-d27400ac4edd",v1.7.0,2024-07-24T23:20:25+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff threads package_type from the manifest through Project/PackageInfo, so library packages no longer trigger a missing-entrypoint error.",second_pass_audit
+qsharp,4cf5f6aabd7fc617878c175b5f3dac4da3c4a133,2024-07-12T03:06:43+00:00,"Fix version conflict for security bump (#1734)
+
+There was some overly strict version locking that was causing the
+dependabot bump in #1730 to fail to build. This loosens the version
+restriction and updates to compatible versions of many packages
+(including 'ws' which should resolve the dependabot issue).",v1.7.0,2024-07-24T23:20:25+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Diff loosens jupyterlab version pins and regenerates yarn.lock for a security bump.,second_pass_audit
+qsharp,58ffcb776c569582e62a07a5847fc40783cdcbc4,2024-07-26T20:07:05+00:00,"Fix accumulating perf impact of `qsharp.run` with may shots in Python (#1769)
+
+The existing imlementation of `qsharp.run` would pass the entry
+expression for every shot executed, causing it to be recompiling and
+building up large internal state due to incrementing node ids and the
+like. This updates the patterns to have the interpreter track the last
+execution graph it compiled such that a new API in Rust can re-`eval`
+that last expression without incurring any additional compilation.",v1.8.0,2024-08-21T19:41:33+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,performance_only,Diff caches the last execution graph so qsharp.run does not recompile the entry expression per shot; an optimisation.,second_pass_audit
+qsharp,4de42e1445df60c494fcdfcd84f3e6f9ad084f6a,2024-08-12T21:32:20+00:00,"Fix test for multi_qubit_measurements/state_modification (#1830)
+
+Doing Reset on the first qubit before checking the state of the second
+qubit can lead to empty solution being judged as correct (with low
+probability). We have to check the state of the second qubit first and
+only then reset the first one.",v1.8.0,2024-08-21T19:41:33+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,test_only,Diff only reorders checks in a kata Verification.qs so the exercise grader cannot pass an empty solution.,second_pass_audit
+qsharp,03965844cb002229025ea67fb190b17b9f199896,2024-09-19T16:21:27+00:00,"Fix typo in vscode extension's package.json (#1917)
+
+Fix small typo that currently appears in Welcome page for the VS Code
+extension:
+
+
+![image](https://github.com/user-attachments/assets/99715265-d098-4b5c-98f7-996d56c451f7)",v1.9.0,2024-09-30T19:31:04+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff fixes a typo in user-facing text in vscode/package.json.,second_pass_audit
+qsharp,24bd838468324ad1bfaf803b0027ce7a9874883d,2024-09-25T16:10:31+00:00,"Playground: Fix error squiggle updates getting dropped (#1908)
+
+In some cases where the user is typing fast, diagnostic updates (a.k.a.
+error squiggles) will get dropped. This can happen when the current
+document version is greater than the version that the diagnostics event
+pertains to.
+
+I'm removing the version check since it was overkill anyway. As long as
+the diagnostics updates are received in order, the state should remain
+consistent.
+
+Repro for future reference:
+
+
+![squiggle-dropped](https://github.com/user-attachments/assets/f37cd9e2-5b47-469c-a518-bcc8df6ce2d2)
+
+
+Interaction between the editor and the language service. Correct
+behavior:
+
+- user types `Foo` in the editor, document version is updated to 1
+- `updateDocument` command with contents `Foo` version=1
+- `diagnostics` event with a type error version=1
+- user types `(` in the editor, document version is updated to 2
+- `updateDocument` command with contents `Foo()`  version=2
+- **`diagnostics` event that clears the errors in the file version=2**
+- **user types `)` in the editor, document version is updated to 3**
+- `updateDocument` command with contents `Foo()` (no change) version=3
+- no diagnostics event is raised since there was no change in the
+document
+
+Now consider the case where the user types so fast that the events above
+that are in bold get flipped:
+
+- user types `Foo` in the editor, document version is updated to 1
+- `updateDocument` command with contents `Foo`   version=1
+- `diagnostics` event with a type error version=1
+- user types `(` in the editor, document version is updated to 2
+- `updateDocument` command with contents `Foo()`  version=2
+- **user types `)` in the editor, document version is updated to 3**
+- **`diagnostics` event that clears the errors in the file version=2**
+- **this event gets dropped since the version doesn't match the current
+document version**
+- `updateDocument` command with contents `Foo()` (no change) version=3
+- no diagnostics event is raised since there was no change in the
+document",v1.9.0,2024-09-30T19:31:04+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff removes the document-version guard in the playground editor that was discarding in-order diagnostic updates while typing quickly.,second_pass_audit
+qsharp,a88fdbd9acdcecf6dd45e8716d7541e99e67a7ec,2025-01-07T21:06:18+00:00,"Fix `Exp` on qubit arrays larger than 2 with single `PauliI` (#2086)
+
+This fixes a bug in the decomposition for `Exp` that would cause a
+runtime failure if an array of more than two qubits was used and a
+single `PauliI` was passed in the Pauli array. The decomposition ignores
+`PauliI` by calling the `RemovePauliI` helper function, but then
+incorrectly uses the original arrays when rather than the filtered
+arrays in the rest of the operation. This adds a test to confirm the fix
+(without the fix the test triggers a runtime failure in `MapPauli`).",v1.13,2025-01-30T23:01:07+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,Diff rebinds paulis/qubits to the RemovePauliI-filtered arrays in Std.Intrinsic.Exp; the stale arrays caused a runtime failure in MapPauli for >2 qubits with a PauliI.,second_pass_audit
+qsharp,15cf834980e9b0c8cfdaa417ef3cf0c94dadb5b0,2025-02-21T17:36:33+00:00,"Fix Run and Debug buttons (#2196)
+
+The change in #2174 broke the Run/Debug UI buttons, as it turns out they
+pass extra parameters that the code used to ignore and were now being
+treated as string input. This adds some runtime type checking to protect
+against that.
+
+When invoked via code lens, the command receives the entry expression as
+expected with the updates:
+<img width=""321"" alt=""image""
+src=""https://github.com/user-attachments/assets/1a7f653d-305b-4f2b-8f7d-98e55333de95""
+/>
+
+When invoked via the command palette, the entry expression is undefined,
+which makes sense because it is a new paramter that was never meant to
+be passed in that scenario:
+<img width=""321"" alt=""image""
+src=""https://github.com/user-attachments/assets/13315a2f-97ab-4783-81f9-a0853e4ce9d9""
+/>
+
+But when invoked via the UI ""Run"" button, the new paramter receives an
+object that presumably describes the UI element:
+<img width=""321"" alt=""image""
+src=""https://github.com/user-attachments/assets/f8a63816-2c9e-4ad0-abd8-52d35366bf23""
+/>
+
+This unexpected input was later treated as a string, passed over the FFI
+into Rust, and then triggered an out-of-bounds memory read.",v1.14.0,2025-02-27T23:41:00+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,regression_fix,,"Diff adds a typeof check on the expr argument, restoring the Run/Debug buttons broken by #2174 when VS Code passes extra parameters.",second_pass_audit
+qsharp,cd1c8a41eb1d2ea37053ed5d5d4cc2e4d539e391,2025-05-13T17:00:43+00:00,"Ignore Dependency Errors when Getting Documentation (#2374)
+
+Addresses #2144 by ignoring dependency errors when getting
+documentation.",v1.17.0,2025-05-28T15:37:51+00:00,0,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff threads an ignore_dependency_errors flag through into_qsc_args so documentation generation is no longer blocked by unrelated dependency errors (issue #2144).,second_pass_audit
+qsharp,6ee204682fa48d1c211bc9f5840d3beb8926af91,2025-06-20T19:55:02+00:00,Fix debug code lense (#2561),v1.18.0,2025-06-24T17:26:09+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff corrects the code lens command id from qsharp-vscode.debugQsharp to debugProgram; the old id was unregistered, so invoking the lens failed.",second_pass_audit
+qsharp,615328fb6875f37786c9bd0a944fd30fcc5efb11,2025-07-18T13:58:01+00:00,"Bump on-headers and morgan (#2613)
+
+Dependabot will resolve any conflicts with this PR as long as you don't
+alter it yourself. You can also trigger a rebase manually by commenting
+`@dependabot rebase`.
+
+[//]: # (dependabot-automerge-start)
+[//]: # (dependabot-automerge-end)
+
+---
+
+<details>
+<summary>Dependabot commands and options</summary>
+<br />
+
+You can trigger Dependabot actions by commenting on this PR:
+- `@dependabot rebase` will rebase this PR
+- `@dependabot recreate` will recreate this PR, overwriting any edits
+that have been made to it
+- `@dependabot merge` will merge this PR after your CI passes on it
+- `@dependabot squash and merge` will squash and merge this PR after
+your CI passes on it
+- `@dependabot cancel merge` will cancel a previously requested merge
+and block automerging
+- `@dependabot reopen` will reopen this PR if it is closed
+- `@dependabot close` will close this PR and stop Dependabot recreating
+it. You can achieve the same result by closing it manually
+- `@dependabot show <dependency name> ignore conditions` will show all
+of the ignore conditions of the specified dependency
+- `@dependabot ignore this major version` will close this PR and stop
+Dependabot creating any more for this major version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this minor version` will close this PR and stop
+Dependabot creating any more for this minor version (unless you reopen
+the PR or upgrade to it yourself)
+- `@dependabot ignore this dependency` will close this PR and stop
+Dependabot creating any more for this dependency (unless you reopen the
+PR or upgrade to it yourself)
+You can disable automated security fix PRs for this repo from the
+[Security Alerts
+page](https://github.com/microsoft/qsharp/network/alerts).
+
+</details>
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>",v1.19.0,2025-07-25T19:42:26+00:00,1,0,0,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,dependency_update,Dependabot bump of on-headers/morgan; only package-lock.json changed.,second_pass_audit
+qsharp,b5de5837c4da31b478e54baa6b69577a6b6b624f,2025-07-24T22:26:27+00:00,"Fix source offset when printing call stack (#2629)
+
+This PR fixes a bug when printing the call stack. We weren't
+substracting the file offset in the SourceMap which is necessary to
+convert from SourceMap offsets to file offsets.",v1.19.0,2025-07-25T19:42:26+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,"Diff subtracts source.offset when converting SourceMap offsets to file offsets, correcting the line:column reported in call stacks.",second_pass_audit
+qsharp,4aee6050aadb931adf7e74d51e5cfd23cfbdf067,2025-08-11T16:39:50+00:00,"Builtin functions in OpenQASM now error when `coerce_literal_expr_to_type` fails (#2622)
+
+Fixes #2620",v1.20.0,2025-08-26T18:47:02+00:00,1,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,Diff makes try_coerce_literal_expr_to_type return a Result so OpenQASM builtin functions report a semantic error on out-of-range literal casts instead of proceeding (issue #2620).,second_pass_audit
+qsharp,03bc8e5f7cd288ef9a9df39fd39549417efacc92,2025-08-13T03:19:14+00:00,Fix Python type hint (#2660),v1.20.0,2025-08-26T18:47:02+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,runtime_failure,,"Diff replaces the 'set[object] | None' annotation with Optional[Set[object]], which is evaluated at definition time and raised on supported Python versions below 3.10.",second_pass_audit
+qsharp,89832b9f9646d43077bf46c5acd45c11d82bf334,2025-08-15T17:43:52+00:00,"Nicer error messages for QIR generation (#2664)
+
+Fixes #2661
+
+---------
+
+Co-authored-by: Mine Starks <>",v1.20.0,2025-08-26T18:47:02+00:00,1,1,1,1,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,nonfunctional,Diff serialises WebAssembly.RuntimeError and broadens error deserialisation to produce friendlier QIR generation messages.,second_pass_audit
+qsharp,f16c99ec2afe725cbd70f8484ee0783ef79aec18,2025-09-09T22:22:03+00:00,"Fix config key for upload supplemental data (#2703)
+
+Silly mistake - this setting name doesn't match what's declared in
+package.json at
+https://github.com/microsoft/qsharp/blob/47e1c8e20d1e1887ca82548da240ed25d2141130/source/vscode/package.json#L148",v1.21.0,2025-10-01T16:41:49+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,logic_fix,,Diff corrects the configuration key to azure.experimental.uploadSupplementalData so the setting declared in package.json is actually read.,second_pass_audit
+qsharp,2b6fb2bd5af9d2a095f4fd051f9008fc544e64a3,2025-09-22T22:01:03+00:00,"Short-circuiting expressions produce divergent types that propagate too far (#2700)
+
+This is a fairly significant adjustment to how divergent types
+propagate. Previously, every time a divergent type encountered another
+type in propagation during inference, the divergence would cause type
+erasure, losing all the information about the type calculated so far.
+This means tuples, like `(<Int>, <Divergent>, <Double>)` would just
+become `<Divergent>` which would allow it to unify with any type, even
+tuples of a different arity. The same is true for arrays, where `[<Int>,
+<Divergent>, <Double>]` would not produce an error even though the type
+inference saw an Int and a Double that can't be in the same array. For
+the fix, this continues to propagate the bool that indicates a type is
+divergent without erasing the type. In specific cases, like the
+boundaries of blocks in if-expressions or the block in a specialization,
+the inference performs intentional type erasure similar to before. This
+allows for short-circuit expressions to have the right effects while
+still having better validation of types we can detect.
+
+Fixes #2697",v1.21.0,2025-10-01T16:41:49+00:00,1,1,1,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,semantic_violation,,"Diff stops divergent types from erasing surrounding type information, so tuples/arrays containing a divergent element are no longer unified with mismatched types.",second_pass_audit
+qsharp,31ba75c18eb3b3404ca94d801d3975f0a8515315,2025-10-14T19:24:03+00:00,"Better `compile` error when missing call to `init` (#2735)
+
+We have a nice error for this case, but refactoring lost it. This makes
+sure the interpreter is initialized before we try to read the global
+config so the variable isn't empty.",v1.22.0,2025-10-31T19:21:09+00:00,1,0,0,1,v1.0.10-rc,0,446,207,include,1,1,2026-09-13T00:00:00+00:00,regression_fix,,"Diff adds get_config() which initialises the interpreter before reading _config, restoring the clear missing-init error lost in an earlier refactor.",second_pass_audit
+qsharp,873022786ad67d85ae6c0dbf030fb6cf4b84b3c7,2025-11-06T17:54:39+00:00,"Avoid name collision in sample (#2772)
+
+This avoids a name collision in the sample that can cause confusion (see
+#2771)",v1.23.0,2025-12-09T03:48:20+00:00,0,1,1,0,v1.0.10-rc,0,446,207,exclude,0,1,2026-09-13T00:00:00+00:00,,docs,Diff only renames a variable in samples/notebooks/sample.ipynb to avoid a confusing name collision.,second_pass_audit

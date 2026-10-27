@@ -1,0 +1,5 @@
+repository,start,end,K,days_to_cutoff,milestones_with_fixes,aliases_collapsed,candidates,included_in_window,median_interval_days,iqr_interval_days
+qiskit,1.2.0rc1,2.3.0rc1,38,517,8,0,259,90,9.043287037037038,10.167152777777776
+cirq,v0.1,v1.6.1,31,2815,20,0,1079,76,77.49303240740741,114.55996817129628
+pennylane,v0.25.0,v0.43.2,38,1234,19,6,1162,75,32.34582175925926,47.05966435185185
+qsharp,v1.0.10-rc,v1.23.0,26,835,23,0,446,114,31.094641203703702,9.059791666666666

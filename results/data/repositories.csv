@@ -1,0 +1,5 @@
+repository,name,color,start,end,K,preferred_model
+qiskit,Qiskit,#2980b9,1.2.0rc1,2.3.0rc1,38,goel
+cirq,Cirq,#e74c3c,v0.1,v1.6.1,31,goel
+pennylane,PennyLane,#27ae60,v0.25.0,v0.43.2,38,yamada
+qsharp,Q#,#8e44ad,v1.0.10-rc,v1.23.0,26,goel

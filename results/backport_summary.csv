@@ -1,0 +1,5 @@
+repository,validated_fixes,mapped_fixes,backported_fixes,pr_reference_only,backport_rate_percent,wilson_lower_percent,wilson_upper_percent,window_start,window_end,outside_window_or_unreleased
+qiskit,90,90,70,1,77.77777777777777,68.1526896089545,85.12866452636068,1.2.0rc1,2.3.0rc1,0
+cirq,76,76,1,0,1.3157894736842106,0.23264800455790602,7.083674751784414,v0.1,v1.6.1,0
+pennylane,75,75,0,0,0.0,3.469446951953614e-16,4.872384248280587,v0.25.0,v0.43.2,0
+qsharp,114,114,1,0,0.8771929824561403,0.15501429397783636,4.802034676013621,v1.0.10-rc,v1.23.0,0

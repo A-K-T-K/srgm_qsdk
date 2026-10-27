@@ -1,0 +1,6 @@
+repository,validated_fixes_count,releases_in_window_count,meets_srgm_threshold
+qiskit,259,156,1
+cirq,1079,32,1
+pennylane,1162,77,1
+qsharp,446,26,1
+qdk,0,26,0

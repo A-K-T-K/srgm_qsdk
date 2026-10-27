@@ -1,0 +1,3 @@
+case_id,type,example_message,rationale
+REF_IN_01,INCLUDED,Fix incorrect sign rotation matrix evaluation inside simulator kernel backend,Corrects a structural deviation from intended runtime semantic output.
+REF_EX_01,EXCLUDED,Refactor lint formatting layout changes across compiler package modules,Non-functional structural maintenance adjustment; does not modify logic or correct runtime errors.

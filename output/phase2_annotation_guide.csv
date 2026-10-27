@@ -1,0 +1,4 @@
+field,allowed_values,definition
+annotator_1_label / annotator_label,"include,exclude,uncertain",include = true defect fix; exclude = non-defect event
+inclusion_rule_triggered,"incorrect_output,runtime_failure,semantic_violation,logic_fix,regression_fix",Operational validation indicator map
+exclusion_rule_triggered,"refactor,docs,test_only,dependency_update,performance_only,style_only,build_only,ci_only,nonfunctional",Exclusion mapping structure matching the annotation protocol
